@@ -1,4 +1,6 @@
 //  건물 목록 데이터
+// 📌 아래 형식으로 계속 추가하세요
+// Building(name: '건물명', location: LatLng(위도, 경도)),
 import '../models/building.dart';
 import 'package:latlong2/latlong.dart';
 
