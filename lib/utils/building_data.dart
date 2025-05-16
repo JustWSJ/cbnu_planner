@@ -103,13 +103,14 @@ final List<Building> buildingList = [
   Building(name: "양현재(관리동)", location: LatLng(36.626998, 127.450496)), // S17-7
   Building(name: "승리관(운동부합숙소)", location: LatLng(36.628538, 127.451448)), // S18
   Building(name: "종양 연구소", location: LatLng(36.628776, 127.451749)), // S19
-  Building(name: "첨단바이오 연구센터", location: LatLng(0.0, 0.0)), // S20
-  Building(name: "농업전문창업보육센터", location: LatLng(0.0, 0.0)), // S21-1
-  Building(name: "임산가공공장", location: LatLng(0.0, 0.0)), // S21-2
-  Building(name: "농업과학기술센터", location: LatLng(0.0, 0.0)), // S21-3
-  Building(name: "농학관 강의동", location: LatLng(0.0, 0.0)), // S21-4
-  Building(name: "농학관 실험동", location: LatLng(0.0, 0.0)), // S21-5
-  Building(name: "건조실", location: LatLng(0.0, 0.0)), // S21-6
+  Building(name: "첨단바이오 연구센터", location: LatLng(36.628883, 127.452435)), // S20
+  Building(
+      name: "농업전문창업보육센터", location: LatLng(36.628875, 127.453042)), // S21-1
+  Building(name: "임산가공공장", location: LatLng(36.629309, 127.451465)), // S21-2
+  Building(name: "농업과학기술센터", location: LatLng(36.629521, 127.451663)), // S21-3
+  Building(name: "농학관 강의동", location: LatLng(36.629443, 127.452666)), // S21-4
+  Building(name: "농학관 실험동", location: LatLng(36.630033, 127.453267)), // S21-5
+  Building(name: "건조실", location: LatLng(36.629998, 127.451797)), // S21-6
   Building(name: "온실(특용식물학과)", location: LatLng(0.0, 0.0)), // S21-7
   Building(name: "온실(식물자원학과)", location: LatLng(0.0, 0.0)), // S21-8
   Building(name: "온실(식물의학과)", location: LatLng(0.0, 0.0)), // S21-9
