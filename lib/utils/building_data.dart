@@ -67,4 +67,64 @@ final List<Building> buildingList = [
   Building(name: "수의과대학2호관", location: LatLng(0.0, 0.0)), // E12-2
   Building(name: "수의과대학및동물의료센터", location: LatLng(0.0, 0.0)), // E12-1
   Building(name: "실험동물연구지원센터", location: LatLng(0.0, 0.0)), // E12-3
+  Building(name: "자연과학대학본관", location: LatLng(0.0, 0.0)), // S1-1
+  Building(name: "자연과학대학", location: LatLng(0.0, 0.0)), // S1-2
+  Building(name: "제3본관", location: LatLng(0.0, 0.0)), // S1-3
+  Building(name: "지연대2호관", location: LatLng(0.0, 0.0)), // S1-4
+  Building(name: "자연대3호관", location: LatLng(0.0, 0.0)), // S1-5
+  Building(name: "자연대4호관", location: LatLng(0.0, 0.0)), // S1-6
+  Building(name: "과학기술도서관", location: LatLng(0.0, 0.0)), // S1-7
+  Building(name: "전산정보원", location: LatLng(0.0, 0.0)), // S2
+  Building(name: "본부관리동", location: LatLng(0.0, 0.0)), // S3
+  Building(name: "약학대학본관", location: LatLng(0.0, 0.0)), // S4-1
+  Building(name: "약학연구동", location: LatLng(0.0, 0.0)), // S4-2
+  Building(name: "농장관리실", location: LatLng(0.0, 0.0)), // S5-1
+  Building(name: "농장관리실창고", location: LatLng(0.0, 0.0)), // S5-2
+  Building(name: "자연대온실 1", location: LatLng(0.0, 0.0)), // S6-1
+  Building(name: "자연대온실 2", location: LatLng(0.0, 0.0)), // S6-2
+  Building(name: "에너지저장연구센터", location: LatLng(0.0, 0.0)), // S7-1
+  Building(name: "교육대학원, 동아리방", location: LatLng(0.0, 0.0)), // S7-2
+  Building(name: "야외공연장", location: LatLng(0.0, 0.0)), // S8
+  Building(name: "박물관", location: LatLng(0.0, 0.0)), // S9
+  Building(name: "차고", location: LatLng(0.0, 0.0)), // S10
+  Building(name: "유류저장창고", location: LatLng(0.0, 0.0)), // S11
+  Building(name: "쓰레기 처리장", location: LatLng(0.0, 0.0)), // S12
+  Building(name: "목공실", location: LatLng(0.0, 0.0)), // S13
+  Building(name: "제2학생회관", location: LatLng(0.0, 0.0)), // S14
+  Building(name: "제1본관", location: LatLng(0.0, 0.0)), // S15
+  Building(name: "본부 창고", location: LatLng(0.0, 0.0)), // S16
+  Building(name: "양성재(지선관)", location: LatLng(0.0, 0.0)), // S17-1
+  Building(name: "양성재(명덕관)", location: LatLng(0.0, 0.0)), // S17-2
+  Building(name: "양성재(신민관)", location: LatLng(0.0, 0.0)), // S17-3
+  Building(name: "양현재(수위실)", location: LatLng(0.0, 0.0)), // S17-4
+  Building(name: "양현재(청운관)", location: LatLng(0.0, 0.0)), // S17-5
+  Building(name: "양현재(등용관)", location: LatLng(0.0, 0.0)), // S17-6
+  Building(name: "양현재(관리동)", location: LatLng(0.0, 0.0)), // S17-7
+  Building(name: "승리관(운동부합숙소)", location: LatLng(0.0, 0.0)), // S18
+  Building(name: "종양 연구소", location: LatLng(0.0, 0.0)), // S19
+  Building(name: "첨단바이오 연구센터", location: LatLng(0.0, 0.0)), // S20
+  Building(name: "농업전문창업보육센터", location: LatLng(0.0, 0.0)), // S21-1
+  Building(name: "임산가공공장", location: LatLng(0.0, 0.0)), // S21-2
+  Building(name: "농업과학기술센터", location: LatLng(0.0, 0.0)), // S21-3
+  Building(name: "농학관 강의동", location: LatLng(0.0, 0.0)), // S21-4
+  Building(name: "농학관 실험동", location: LatLng(0.0, 0.0)), // S21-5
+  Building(name: "건조실", location: LatLng(0.0, 0.0)), // S21-6
+  Building(name: "온실(특용식물학과)", location: LatLng(0.0, 0.0)), // S21-7
+  Building(name: "온실(식물자원학과)", location: LatLng(0.0, 0.0)), // S21-8
+  Building(name: "온실(식물의학과)", location: LatLng(0.0, 0.0)), // S21-9
+  Building(name: "온실(산림학과)", location: LatLng(0.0, 0.0)), // S21-10
+  Building(name: "온실(원예과학과)", location: LatLng(0.0, 0.0)), // S21-11
+  Building(name: "온실(원예과학과)", location: LatLng(0.0, 0.0)), // S21-12
+  Building(name: "온실창고", location: LatLng(0.0, 0.0)), // S21-13
+  Building(name: "온실(1)", location: LatLng(0.0, 0.0)), // S21-14
+  Building(name: "온실(2)", location: LatLng(0.0, 0.0)), // S21-15
+  Building(name: "온실(3)", location: LatLng(0.0, 0.0)), // S21-16
+  Building(name: "온실(4)", location: LatLng(0.0, 0.0)), // S21-17
+  Building(name: "온실(5)", location: LatLng(0.0, 0.0)), // S21-18
+  Building(name: "넷트하우스", location: LatLng(0.0, 0.0)), // S21-19
+  Building(name: "온실관리동", location: LatLng(0.0, 0.0)), // S21-20
+  Building(name: "동위원소실", location: LatLng(0.0, 0.0)), // S21-21
+  Building(name: "농기계공작실", location: LatLng(0.0, 0.0)), // S21-22
+  Building(name: "농기계실습실", location: LatLng(0.0, 0.0)), // S21-23
+  Building(name: "농대부속건물", location: LatLng(0.0, 0.0)), // S21-24
 ];
