@@ -127,10 +127,10 @@ final List<Building> buildingList = [
   Building(name: "온실(3)", location: LatLng(36.630517, 127.451580)), // S21-16
   Building(name: "온실(4)", location: LatLng(36.630517, 127.451580)), // S21-17
   Building(name: "온실(5)", location: LatLng(36.630517, 127.451580)), // S21-18
-  Building(name: "넷트하우스", location: LatLng(0.0, 0.0)), // S21-19
-  Building(name: "온실관리동", location: LatLng(0.0, 0.0)), // S21-20
-  Building(name: "동위원소실", location: LatLng(0.0, 0.0)), // S21-21
-  Building(name: "농기계공작실", location: LatLng(0.0, 0.0)), // S21-22
-  Building(name: "농기계실습실", location: LatLng(0.0, 0.0)), // S21-23
-  Building(name: "농대부속건물", location: LatLng(0.0, 0.0)), // S21-24
+  Building(name: "넷트하우스", location: LatLng(36.630812, 127.451247)), // S21-19
+  Building(name: "온실관리동", location: LatLng(36.630678, 127.451749)), // S21-20
+  Building(name: "동위원소실", location: LatLng(36.630571, 127.452256)), // S21-21
+  Building(name: "농기계공작실", location: LatLng(36.631096, 127.451904)), // S21-22
+  Building(name: "농기계실습실", location: LatLng(36.630894, 127.452151)), // S21-23
+  Building(name: "농대부속건물", location: LatLng(36.630773, 127.452382)), // S21-24
 ];
