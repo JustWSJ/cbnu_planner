@@ -111,18 +111,22 @@ final List<Building> buildingList = [
   Building(name: "농학관 강의동", location: LatLng(36.629443, 127.452666)), // S21-4
   Building(name: "농학관 실험동", location: LatLng(36.630033, 127.453267)), // S21-5
   Building(name: "건조실", location: LatLng(36.629998, 127.451797)), // S21-6
-  Building(name: "온실(특용식물학과)", location: LatLng(0.0, 0.0)), // S21-7
-  Building(name: "온실(식물자원학과)", location: LatLng(0.0, 0.0)), // S21-8
-  Building(name: "온실(식물의학과)", location: LatLng(0.0, 0.0)), // S21-9
-  Building(name: "온실(산림학과)", location: LatLng(0.0, 0.0)), // S21-10
-  Building(name: "온실(원예과학과)", location: LatLng(0.0, 0.0)), // S21-11
-  Building(name: "온실(원예과학과)", location: LatLng(0.0, 0.0)), // S21-12
-  Building(name: "온실창고", location: LatLng(0.0, 0.0)), // S21-13
-  Building(name: "온실(1)", location: LatLng(0.0, 0.0)), // S21-14
-  Building(name: "온실(2)", location: LatLng(0.0, 0.0)), // S21-15
-  Building(name: "온실(3)", location: LatLng(0.0, 0.0)), // S21-16
-  Building(name: "온실(4)", location: LatLng(0.0, 0.0)), // S21-17
-  Building(name: "온실(5)", location: LatLng(0.0, 0.0)), // S21-18
+  Building(
+      name: "온실(특용식물학과)", location: LatLng(36.630095, 127.451862)), // S21-7
+  Building(
+      name: "온실(식물자원학과)", location: LatLng(36.630033, 127.451993)), // S21-8
+  Building(name: "온실(식물의학과)", location: LatLng(36.630267, 127.452022)), // S21-9
+  Building(name: "온실(산림학과)", location: LatLng(36.630192, 127.452132)), // S21-10
+  Building(
+      name: "온실(원예과학과)", location: LatLng(36.630429, 127.452146)), // S21-11
+  Building(
+      name: "온실(원예과학과)", location: LatLng(36.630347, 127.452234)), // S21-12
+  Building(name: "온실창고", location: LatLng(36.630274, 127.451548)), // S21-13
+  Building(name: "온실(1)", location: LatLng(36.630517, 127.451580)), // S21-14
+  Building(name: "온실(2)", location: LatLng(36.630517, 127.451580)), // S21-15
+  Building(name: "온실(3)", location: LatLng(36.630517, 127.451580)), // S21-16
+  Building(name: "온실(4)", location: LatLng(36.630517, 127.451580)), // S21-17
+  Building(name: "온실(5)", location: LatLng(36.630517, 127.451580)), // S21-18
   Building(name: "넷트하우스", location: LatLng(0.0, 0.0)), // S21-19
   Building(name: "온실관리동", location: LatLng(0.0, 0.0)), // S21-20
   Building(name: "동위원소실", location: LatLng(0.0, 0.0)), // S21-21
