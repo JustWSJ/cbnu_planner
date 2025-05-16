@@ -75,13 +75,13 @@ final List<Building> buildingList = [
   Building(name: "자연대6호관", location: LatLng(36.624871, 127.455906)), // S1-6
   Building(name: "과학기술도서관", location: LatLng(36.626946, 127.457084)), // S1-7
   Building(name: "전산정보원", location: LatLng(36.626396, 127.455397)), // S2
-  Building(name: "본부관리동", location: LatLng(0.0, 0.0)), // S3
-  Building(name: "약학대학본관", location: LatLng(0.0, 0.0)), // S4-1
-  Building(name: "약학연구동", location: LatLng(0.0, 0.0)), // S4-2
-  Building(name: "농장관리실", location: LatLng(0.0, 0.0)), // S5-1
-  Building(name: "농장관리실창고", location: LatLng(0.0, 0.0)), // S5-2
-  Building(name: "자연대온실 1", location: LatLng(0.0, 0.0)), // S6-1
-  Building(name: "자연대온실 2", location: LatLng(0.0, 0.0)), // S6-2
+  Building(name: "본부관리동", location: LatLng(36.626473, 127.454495)), // S3
+  Building(name: "약학대학본관", location: LatLng(36.625625, 127.454415)), // S4-1
+  Building(name: "약학연구동", location: LatLng(36.625254, 127.454823)), // S4-2
+  Building(name: "농장관리실", location: LatLng(36.625095, 127.453777)), // S5-1
+  Building(name: "농장관리실창고", location: LatLng(36.624927, 127.453739)), // S5-2
+  Building(name: "자연대온실 1", location: LatLng(36.625781, 127.453331)), // S6-1
+  Building(name: "자연대온실 2", location: LatLng(36.626662, 127.453144)), // S6-2
   Building(name: "에너지저장연구센터", location: LatLng(0.0, 0.0)), // S7-1
   Building(name: "교육대학원, 동아리방", location: LatLng(0.0, 0.0)), // S7-2
   Building(name: "야외공연장", location: LatLng(0.0, 0.0)), // S8
