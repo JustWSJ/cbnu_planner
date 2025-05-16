@@ -91,18 +91,18 @@ final List<Building> buildingList = [
   Building(name: "유류저장창고", location: LatLng(36.627859, 127.455576)), // S11
   Building(name: "쓰레기 처리장", location: LatLng(36.628321, 127.455013)), // S12
   Building(name: "목공실", location: LatLng(36.628110, 127.454630)), // S13
-  Building(name: "제2학생회관", location: LatLng(0.0, 0.0)), // S14
+  Building(name: "제2학생회관", location: LatLng(36.628027, 127.454326)), // S14
   Building(name: "제1본관", location: LatLng(0.0, 0.0)), // S15
   Building(name: "본부 창고", location: LatLng(0.0, 0.0)), // S16
-  Building(name: "양성재(지선관)", location: LatLng(0.0, 0.0)), // S17-1
-  Building(name: "양성재(명덕관)", location: LatLng(0.0, 0.0)), // S17-2
-  Building(name: "양성재(신민관)", location: LatLng(0.0, 0.0)), // S17-3
-  Building(name: "양현재(수위실)", location: LatLng(0.0, 0.0)), // S17-4
-  Building(name: "양현재(청운관)", location: LatLng(0.0, 0.0)), // S17-5
-  Building(name: "양현재(등용관)", location: LatLng(0.0, 0.0)), // S17-6
-  Building(name: "양현재(관리동)", location: LatLng(0.0, 0.0)), // S17-7
-  Building(name: "승리관(운동부합숙소)", location: LatLng(0.0, 0.0)), // S18
-  Building(name: "종양 연구소", location: LatLng(0.0, 0.0)), // S19
+  Building(name: "양성재(지선관)", location: LatLng(36.628061, 127.452704)), // S17-1
+  Building(name: "양성재(명덕관)", location: LatLng(36.628061, 127.452704)), // S17-2
+  Building(name: "양성재(신민관)", location: LatLng(36.627192, 127.452221)), // S17-3
+  Building(name: "양현재(수위실)", location: LatLng(36.627587, 127.450118)), // S17-4
+  Building(name: "양현재(청운관)", location: LatLng(36.627760, 127.450140)), // S17-5
+  Building(name: "양현재(등용관)", location: LatLng(36.627097, 127.451011)), // S17-6
+  Building(name: "양현재(관리동)", location: LatLng(36.626998, 127.450496)), // S17-7
+  Building(name: "승리관(운동부합숙소)", location: LatLng(36.628538, 127.451448)), // S18
+  Building(name: "종양 연구소", location: LatLng(36.628776, 127.451749)), // S19
   Building(name: "첨단바이오 연구센터", location: LatLng(0.0, 0.0)), // S20
   Building(name: "농업전문창업보육센터", location: LatLng(0.0, 0.0)), // S21-1
   Building(name: "임산가공공장", location: LatLng(0.0, 0.0)), // S21-2
