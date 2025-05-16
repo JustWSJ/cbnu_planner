@@ -5,7 +5,7 @@ import '../models/building.dart';
 import 'package:latlong2/latlong.dart';
 
 final List<Building> buildingList = [
-   Building(name: "수위실", location: LatLng(0.0, 0.0)), // N1
+  Building(name: "수위실", location: LatLng(0.0, 0.0)), // N1
   Building(name: "법학전문대학원", location: LatLng(0.0, 0.0)), // N2
   Building(name: "테니스장 관리사", location: LatLng(0.0, 0.0)), // N3
   Building(name: "산학협력관", location: LatLng(0.0, 0.0)), // N4
@@ -67,14 +67,14 @@ final List<Building> buildingList = [
   Building(name: "수의과대학2호관", location: LatLng(0.0, 0.0)), // E12-2
   Building(name: "수의과대학및동물의료센터", location: LatLng(0.0, 0.0)), // E12-1
   Building(name: "실험동물연구지원센터", location: LatLng(0.0, 0.0)), // E12-3
-  Building(name: "자연과학대학본관", location: LatLng(0.0, 0.0)), // S1-1
-  Building(name: "자연과학대학", location: LatLng(0.0, 0.0)), // S1-2
-  Building(name: "제3본관", location: LatLng(0.0, 0.0)), // S1-3
-  Building(name: "지연대2호관", location: LatLng(0.0, 0.0)), // S1-4
-  Building(name: "자연대3호관", location: LatLng(0.0, 0.0)), // S1-5
-  Building(name: "자연대4호관", location: LatLng(0.0, 0.0)), // S1-6
-  Building(name: "과학기술도서관", location: LatLng(0.0, 0.0)), // S1-7
-  Building(name: "전산정보원", location: LatLng(0.0, 0.0)), // S2
+  Building(name: "자연과학대학본관", location: LatLng(36.627764, 127.456824)), // S1-1
+  Building(name: "자연대2호관", location: LatLng(36.627166, 127.456904)), // S1-2
+  Building(name: "제연대3호관", location: LatLng(36.626701, 127.456850)), // S1-3
+  Building(name: "지연대4호관", location: LatLng(36.626313, 127.456861)), // S1-4
+  Building(name: "자연대5호관", location: LatLng(36.625513, 127.455499)), // S1-5
+  Building(name: "자연대6호관", location: LatLng(36.624871, 127.455906)), // S1-6
+  Building(name: "과학기술도서관", location: LatLng(36.626946, 127.457084)), // S1-7
+  Building(name: "전산정보원", location: LatLng(36.626396, 127.455397)), // S2
   Building(name: "본부관리동", location: LatLng(0.0, 0.0)), // S3
   Building(name: "약학대학본관", location: LatLng(0.0, 0.0)), // S4-1
   Building(name: "약학연구동", location: LatLng(0.0, 0.0)), // S4-2
