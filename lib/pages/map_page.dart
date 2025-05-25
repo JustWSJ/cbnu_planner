@@ -24,3 +24,20 @@ class _MapPageState extends State<MapPage> {
     super.initState();
     _startTrackingLocation();
   }
+
+  void _startTrackingLocation() async {
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
+      permission = await Geolocator.requestPermission();
+    }
+
+    if (permission == LocationPermission.always || permission == LocationPermission.whileInUse) {
+      Geolocator.getPositionStream(
+        locationSettings: const LocationSettings(accuracy: LocationAccuracy.best),
+      ).listen((Position position) {
+        setState(() {
+          currentLocation = LatLng(position.latitude, position.longitude);
+        });
+      });
+    }
+  }
