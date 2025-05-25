@@ -70,3 +70,22 @@ class _MapPageState extends State<MapPage> {
             ),
 
           // 🔴 일정 마커
+           MarkerLayer(
+            markers: widget.schedules.map((schedule) {
+              final coords = MapService.getBuildingCoordinates(
+                schedule.place,
+                buildingList,
+              );
+              return Marker(
+                point: coords,
+                width: 80,
+                height: 80,
+                child: const Icon(Icons.location_on, color: Colors.red, size: 36),
+              );
+            }).toList(),
+          ),
+        ],
+      ),
+    );
+  }
+}
