@@ -41,7 +41,7 @@ class _MapPageState extends State<MapPage> {
       });
     }
   }
-  
+
  @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,3 +56,17 @@ class _MapPageState extends State<MapPage> {
             urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
             userAgentPackageName: 'com.example.campus_schedule_manager',
           ),
+// 🔵 현위치 마커
+          if (currentLocation != null)
+            MarkerLayer(
+              markers: [
+                Marker(
+                  point: currentLocation!,
+                  width: 50,
+                  height: 50,
+                  child: const Icon(Icons.my_location, color: Colors.blue, size: 40),
+                ),
+              ],
+            ),
+
+          // 🔴 일정 마커
