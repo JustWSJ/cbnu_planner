@@ -69,8 +69,8 @@ final List<Building> buildingList = [
   Building(name: "실험동물연구지원센터", location: LatLng(0.0, 0.0)), // E12-3
   Building(name: "자연과학대학본관(S1-1)", location: LatLng(36.627764, 127.456824)), // S1-1
   Building(name: "자연대2호관(S1-2)", location: LatLng(36.627166, 127.456904)), // S1-2
-  Building(name: "제연대3호관(S1-3)", location: LatLng(36.626701, 127.456850)), // S1-3
-  Building(name: "지연대4호관(S1-4)", location: LatLng(36.626313, 127.456861)), // S1-4
+  Building(name: "자연대3호관(S1-3)", location: LatLng(36.626701, 127.456850)), // S1-3
+  Building(name: "자연대4호관(S1-4)", location: LatLng(36.626313, 127.456861)), // S1-4
   Building(name: "자연대5호관(S1-5)", location: LatLng(36.625513, 127.455499)), // S1-5
   Building(name: "자연대6호관(S1-6)", location: LatLng(36.624871, 127.455906)), // S1-6
   Building(name: "과학기술도서관(S1-7)", location: LatLng(36.626946, 127.457084)), // S1-7
