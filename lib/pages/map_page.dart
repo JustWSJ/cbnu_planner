@@ -41,3 +41,18 @@ class _MapPageState extends State<MapPage> {
       });
     }
   }
+  
+ @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('캠퍼스 지도')),
+      body: FlutterMap(
+        options: MapOptions(
+          center: currentLocation ?? LatLng(36.6282, 127.4562),
+          zoom: 17.0,
+        ),
+        children: [
+          TileLayer(
+            urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            userAgentPackageName: 'com.example.campus_schedule_manager',
+          ),
