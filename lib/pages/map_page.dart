@@ -15,3 +15,12 @@ class MapPage extends StatefulWidget {
   @override
   State<MapPage> createState() => _MapPageState();
 }
+
+class _MapPageState extends State<MapPage> {
+  LatLng? currentLocation;
+
+  @override
+  void initState() {
+    super.initState();
+    _startTrackingLocation();
+  }
