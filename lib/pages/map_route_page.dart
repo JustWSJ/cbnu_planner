@@ -21,4 +21,13 @@ class MapRoutePage extends StatelessWidget {
     });
     return sorted;
   }
+
+  /// 일정 리스트를 좌표 리스트로 변환
+  List<LatLng> _getCoordinates(List<Schedule> sortedSchedules) {
+    return sortedSchedules.map((s) {
+      final coord = MapService.getBuildingCoordinates(s.place, buildingList);
+      print('📍 ${s.place} → $coord');
+      return coord;
+    }).toList();
+  }
 }
