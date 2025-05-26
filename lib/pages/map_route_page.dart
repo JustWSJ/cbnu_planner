@@ -52,4 +52,42 @@ class MapRoutePage extends StatelessWidget {
       );
     }).toList();
   }
+
+  @override
+  Widget build(BuildContext context) {
+    final sortedSchedules = _getSortedSchedules();
+    final points = _getCoordinates(sortedSchedules);
+
+    print('📏 경로 좌표 개수: ${points.length}');
+    print('📏 경로 좌표 목록: $points');
+
+    return Scaffold(
+      appBar: AppBar(title: const Text('이동 경로 보기')),
+      body: FlutterMap(
+        options: MapOptions(
+          center: points.isNotEmpty ? points.first : LatLng(36.6282, 127.4562),
+          zoom: 17.0,
+        ),
+        children: [
+          TileLayer(
+            urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            userAgentPackageName: 'com.example.cbnu_planner',
+          ),
+          if (points.length >= 2)
+            PolylineLayer(
+              polylines: [
+                Polyline(
+                  points: points,
+                  strokeWidth: 4.0,
+                  color: Colors.blueAccent,
+                ),
+              ],
+            ),
+          MarkerLayer(
+            markers: _buildMarkers(sortedSchedules, points),
+          ),
+        ],
+      ),
+    );
+  }
 }
