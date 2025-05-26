@@ -30,4 +30,26 @@ class MapRoutePage extends StatelessWidget {
       return coord;
     }).toList();
   }
+
+  /// 마커 리스트 생성
+  List<Marker> _buildMarkers(
+      List<Schedule> sortedSchedules, List<LatLng> points) {
+    return points.asMap().entries.map((entry) {
+      final index = entry.key;
+      final point = entry.value;
+      final title = sortedSchedules[index].title;
+      return Marker(
+        width: 80,
+        height: 80,
+        point: point,
+        child: Column(
+          children: [
+            const Icon(Icons.location_on, color: Colors.red, size: 36),
+            Text('${index + 1}', style: const TextStyle(fontSize: 12)),
+            Text(title, style: const TextStyle(fontSize: 10)),
+          ],
+        ),
+      );
+    }).toList();
+  }
 }
