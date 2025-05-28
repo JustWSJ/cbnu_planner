@@ -96,5 +96,37 @@ class _MapRoutePageState extends State<MapRoutePage> {
     return markers;
   }
 
-  
+  @override
+  Widget build(BuildContext context) {
+    final sortedSchedules = _sortSchedulesByTime();
+    final routePoints = _generateRoutePoints(sortedSchedules);
+    final markers = _createMarkers(sortedSchedules, routePoints);
+
+    return Scaffold(
+      appBar: AppBar(title: const Text('이동 경로 보기')),
+      body: FlutterMap(
+        options: MapOptions(
+          center: routePoints.isNotEmpty ? routePoints.first : LatLng(36.6282, 127.4562),
+          zoom: 17.0,
+        ),
+        children: [
+          TileLayer(
+            urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+            userAgentPackageName: 'com.example.cbnu_planner',
+          ),
+          if (routePoints.length >= 2)
+            PolylineLayer(
+              polylines: [
+                Polyline(
+                  points: routePoints,
+                  strokeWidth: 4.0,
+                  color: Colors.blueAccent,
+                ),
+              ],
+            ),
+          MarkerLayer(markers: markers),
+        ],
+      ),
+    );
+  }
 }
