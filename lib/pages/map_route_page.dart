@@ -25,5 +25,18 @@ class _MapRoutePageState extends State<MapRoutePage> {
     _requestAndSetCurrentLocation();
   }
 
+  Future<void> _requestAndSetCurrentLocation() async {
+    final permission = await Geolocator.requestPermission();
+    if (permission == LocationPermission.always ||
+        permission == LocationPermission.whileInUse) {
+      final position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.best,
+      );
+      setState(() {
+        currentLocation = LatLng(position.latitude, position.longitude);
+      });
+    }
+  }
+
   
 }
