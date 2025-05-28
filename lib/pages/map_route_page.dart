@@ -38,5 +38,12 @@ class _MapRoutePageState extends State<MapRoutePage> {
     }
   }
 
+  List<Schedule> _sortSchedulesByTime() {
+    final sorted = [...widget.schedules];
+    sorted.sort((a, b) => (a.time.hour * 60 + a.time.minute)
+        .compareTo(b.time.hour * 60 + b.time.minute));
+    return sorted;
+  }
+
   
 }
