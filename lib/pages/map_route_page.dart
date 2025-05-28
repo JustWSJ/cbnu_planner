@@ -15,3 +15,15 @@ class MapRoutePage extends StatefulWidget {
   @override
   State<MapRoutePage> createState() => _MapRoutePageState();
 }
+
+class _MapRoutePageState extends State<MapRoutePage> {
+  LatLng? currentLocation;
+
+  @override
+  void initState() {
+    super.initState();
+    _requestAndSetCurrentLocation();
+  }
+
+  
+}
