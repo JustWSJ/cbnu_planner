@@ -45,5 +45,21 @@ class _MapRoutePageState extends State<MapRoutePage> {
     return sorted;
   }
 
+  List<LatLng> _generateRoutePoints(List<Schedule> sortedSchedules) {
+    final points = sortedSchedules.map((s) {
+      final coord = MapService.getBuildingCoordinates(s.place, buildingList);
+      debugPrint('📍 ${s.place} → $coord');
+      return coord;
+    }).toList();
+
+    if (currentLocation != null) {
+      points.insert(0, currentLocation!);
+    }
+
+    debugPrint('📏 경로 좌표 개수: ${points.length}');
+    debugPrint('📏 경로 좌표 목록: $points');
+    return points;
+  }
+
   
 }
