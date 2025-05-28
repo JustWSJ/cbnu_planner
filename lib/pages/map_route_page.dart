@@ -61,5 +61,40 @@ class _MapRoutePageState extends State<MapRoutePage> {
     return points;
   }
 
+  List<Marker> _createMarkers(List<Schedule> sortedSchedules, List<LatLng> points) {
+    final markers = <Marker>[];
+
+    if (currentLocation != null) {
+      markers.add(
+        Marker(
+          point: currentLocation!,
+          width: 40,
+          height: 40,
+          child: const Icon(Icons.my_location, color: Colors.blue, size: 36),
+        ),
+      );
+    }
+
+    for (int i = 0; i < sortedSchedules.length; i++) {
+      final point = points[currentLocation != null ? i + 1 : i];
+      markers.add(
+        Marker(
+          point: point,
+          width: 80,
+          height: 80,
+          child: Column(
+            children: [
+              const Icon(Icons.location_on, color: Colors.red, size: 36),
+              Text('${i + 1}', style: const TextStyle(fontSize: 12)),
+              Text(sortedSchedules[i].title, style: const TextStyle(fontSize: 10)),
+            ],
+          ),
+        ),
+      );
+    }
+
+    return markers;
+  }
+
   
 }
