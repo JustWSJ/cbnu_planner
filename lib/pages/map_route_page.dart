@@ -37,3 +37,14 @@ class _MapRoutePageState extends State<MapRoutePage> {
     _positionStream?.cancel();
     super.dispose();
   }
+
+  void _setNextSchedule() {
+    final now = TimeOfDay.now();
+    final sorted = [...widget.schedules];
+    sorted.sort((a, b) => (a.time.hour * 60 + a.time.minute)
+        .compareTo(b.time.hour * 60 + b.time.minute));
+
+    for (var s in sorted) {
+      if ((s.time.hour > now.hour) ||
+          (s.time.hour == now.hour && s.time.minute > now.minute)) {
+  
