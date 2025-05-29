@@ -127,3 +127,13 @@ class _MapRoutePageState extends State<MapRoutePage> {
                 Icons.location_on,
                 color: isNext ? Colors.green : Colors.red,
                 size: 36,
+              ),
+              Text(schedule.title, style: const TextStyle(fontSize: 10)),
+            ],
+          ),
+        ),
+      );
+    }
+
+    return markers;
+  }
