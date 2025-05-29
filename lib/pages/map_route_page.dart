@@ -137,3 +137,13 @@ class _MapRoutePageState extends State<MapRoutePage> {
 
     return markers;
   }
+
+  @override
+  Widget build(BuildContext context) {
+    final markers = _createMarkers();
+
+    return Scaffold(
+      appBar: AppBar(title: const Text('이동 경로 보기')),
+      body: Stack(
+        children: [
+          FlutterMap(
