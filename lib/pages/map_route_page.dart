@@ -57,4 +57,14 @@ class _MapRoutePageState extends State<MapRoutePage> {
     }
   }
 
-  
+  Future<void> _requestAndSetCurrentLocation() async {
+    final permission = await Geolocator.requestPermission();
+    if (permission == LocationPermission.always ||
+        permission == LocationPermission.whileInUse) {
+      _positionStream = Geolocator.getPositionStream(
+        locationSettings: const LocationSettings(
+          accuracy: LocationAccuracy.high,
+          distanceFilter: 5,
+        ),
+      ).listen((position) {
+       
