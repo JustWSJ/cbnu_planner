@@ -47,4 +47,14 @@ class _MapRoutePageState extends State<MapRoutePage> {
     for (var s in sorted) {
       if ((s.time.hour > now.hour) ||
           (s.time.hour == now.hour && s.time.minute > now.minute)) {
+        nextSchedule = s;
+        return;
+      }
+    }
+
+    if (sorted.isNotEmpty) {
+      nextSchedule = sorted.first;
+    }
+  }
+
   
