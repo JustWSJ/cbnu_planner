@@ -27,3 +27,13 @@ class _MapRoutePageState extends State<MapRoutePage> {
 
   @override
   void initState() {
+    super.initState();
+    _setNextSchedule();
+    _requestAndSetCurrentLocation();
+  }
+
+  @override
+  void dispose() {
+    _positionStream?.cancel();
+    super.dispose();
+  }
