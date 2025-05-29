@@ -167,3 +167,13 @@ class _MapRoutePageState extends State<MapRoutePage> {
                     ),
                   ],
                 ),
+              MarkerLayer(markers: markers),
+            ],
+          ),
+
+          if (nextSchedule != null && currentLocation != null)
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                margin: const EdgeInsets.only(bottom: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
