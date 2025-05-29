@@ -97,4 +97,13 @@ class _MapRoutePageState extends State<MapRoutePage> {
   }
 
   List<Marker> _createMarkers() {
- 
+    final markers = <Marker>[];
+
+    if (currentLocation != null) {
+      markers.add(
+        Marker(
+          point: currentLocation!,
+          width: 40,
+          height: 40,
+          child: const Icon(Icons.my_location, color: Colors.blue, size: 36),
+        ),
