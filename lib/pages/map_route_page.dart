@@ -18,3 +18,12 @@ class MapRoutePage extends StatefulWidget {
   State<MapRoutePage> createState() => _MapRoutePageState();
 }
 
+class _MapRoutePageState extends State<MapRoutePage> {
+  LatLng? currentLocation;
+  Schedule? nextSchedule;
+  double distanceToNext = 0.0;
+  StreamSubscription<Position>? _positionStream;
+  List<LatLng> routePoints = [];
+
+  @override
+  void initState() {
