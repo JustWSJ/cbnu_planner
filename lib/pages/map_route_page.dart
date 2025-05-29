@@ -107,3 +107,13 @@ class _MapRoutePageState extends State<MapRoutePage> {
           height: 40,
           child: const Icon(Icons.my_location, color: Colors.blue, size: 36),
         ),
+      );
+    }
+
+    for (var schedule in widget.schedules) {
+      final point = MapService.getBuildingCoordinates(schedule.place, buildingList);
+      final isNext = nextSchedule?.title == schedule.title &&
+          nextSchedule?.time == schedule.time &&
+          nextSchedule?.place == schedule.place;
+
+      markers.add(
