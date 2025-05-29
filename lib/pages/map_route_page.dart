@@ -8,3 +8,13 @@ import '../models/schedule.dart';
 import '../services/map_service.dart';
 import '../services/route_service.dart';
 import '../utils/building_data.dart';
+
+class MapRoutePage extends StatefulWidget {
+  final List<Schedule> schedules;
+
+  const MapRoutePage({super.key, required this.schedules});
+
+  @override
+  State<MapRoutePage> createState() => _MapRoutePageState();
+}
+
