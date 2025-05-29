@@ -117,3 +117,13 @@ class _MapRoutePageState extends State<MapRoutePage> {
           nextSchedule?.place == schedule.place;
 
       markers.add(
+        Marker(
+          point: point,
+          width: 80,
+          height: 80,
+          child: Column(
+            children: [
+              Icon(
+                Icons.location_on,
+                color: isNext ? Colors.green : Colors.red,
+                size: 36,
