@@ -157,3 +157,13 @@ class _MapRoutePageState extends State<MapRoutePage> {
                 urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
                 userAgentPackageName: 'com.example.cbnu_planner',
               ),
+              if (routePoints.length >= 2)
+                PolylineLayer(
+                  polylines: [
+                    Polyline(
+                      points: routePoints,
+                      strokeWidth: 4.0,
+                      color: Colors.blueAccent,
+                    ),
+                  ],
+                ),
