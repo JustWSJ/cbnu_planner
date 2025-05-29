@@ -17,4 +17,24 @@ class RouteService {
         'Content-Type': 'application/json',
       },
       body: json.encode({
+        'coordinates': [
+          [start.longitude, start.latitude],
+          [end.longitude, end.latitude],
+        ]
+      }),
+    );
+
+    debugPrint("📍 start: $start");
+    debugPrint("📍 end: $end");
+    debugPrint("📦 status: ${response.statusCode}");
+    debugPrint("📩 body: ${response.body}");
+
+    if (response.statusCode == 200) {
+      final data = json.decode(response.body);
+
+      try {
+        final geometry = data['routes'][0]['geometry'] as String;
+        final points = decodePolyline(geometry);
+        return points;
+      } catch (e) {
  
