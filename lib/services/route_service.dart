@@ -37,4 +37,23 @@ class RouteService {
         final points = decodePolyline(geometry);
         return points;
       } catch (e) {
- 
+        throw Exception('❌ Invalid route response: $e');
+      }
+    } else {
+      throw Exception('Failed to get route: ${response.body}');
+    }
+  }
+
+  static List<LatLng> decodePolyline(String encoded) {
+    List<LatLng> points = [];
+    int index = 0, len = encoded.length;
+    int lat = 0, lng = 0;
+
+    while (index < len) {
+      int b, shift = 0, result = 0;
+
+      do {
+        b = encoded.codeUnitAt(index++) - 63;
+        result |= (b & 0x1f) << shift;
+        shift += 5;
+      } while (b >= 0x20);
