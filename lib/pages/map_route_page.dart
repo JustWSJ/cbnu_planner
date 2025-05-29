@@ -147,3 +147,13 @@ class _MapRoutePageState extends State<MapRoutePage> {
       body: Stack(
         children: [
           FlutterMap(
+            options: MapOptions(
+              center:
+                  routePoints.isNotEmpty ? routePoints.first : LatLng(36.6282, 127.4562),
+              zoom: 17.0,
+            ),
+            children: [
+              TileLayer(
+                urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
+                userAgentPackageName: 'com.example.cbnu_planner',
+              ),
