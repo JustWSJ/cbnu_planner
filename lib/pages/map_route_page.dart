@@ -67,4 +67,13 @@ class _MapRoutePageState extends State<MapRoutePage> {
           distanceFilter: 5,
         ),
       ).listen((position) {
-       
+        if (!mounted) return;
+        setState(() {
+          currentLocation = LatLng(position.latitude, position.longitude);
+        });
+        _updateDistanceAndRoute();
+      });
+    }
+  }
+
+  Future<void> _updateDistanceAndRoute() async {
