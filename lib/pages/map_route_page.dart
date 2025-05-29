@@ -177,3 +177,24 @@ class _MapRoutePageState extends State<MapRoutePage> {
               child: Container(
                 margin: const EdgeInsets.only(bottom: 16),
                 padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                color: Colors.white.withOpacity(0.95),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      '다음 장소: ${nextSchedule!.place}',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      '거리: ${distanceToNext.toStringAsFixed(1)} m',
+                      style: TextStyle(color: Colors.grey[700]),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+        ],
+      ),
+    );
+  }
+}
