@@ -77,3 +77,14 @@ class _MapRoutePageState extends State<MapRoutePage> {
   }
 
   Future<void> _updateDistanceAndRoute() async {
+    if (currentLocation != null && nextSchedule != null) {
+      final nextLatLng = MapService.getBuildingCoordinates(
+        nextSchedule!.place,
+        buildingList,
+      );
+
+      distanceToNext = Distance().as(LengthUnit.Meter, currentLocation!, nextLatLng);
+
+      try {
+        final points = await RouteService.getRoute(currentLocation!, nextLatLng);
+ 
