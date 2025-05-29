@@ -3,8 +3,9 @@ import 'package:flutter/material.dart';
 import '../models/schedule.dart';
 import '../widgets/schedule_form.dart';
 import '../widgets/schedule_list.dart';
-import 'map_page.dart';
 import '../utils/building_data.dart';
+import 'package:cbnu_planner/pages/map_route_page.dart'; 
+
 
 class ScheduleInputPage extends StatefulWidget {
   const ScheduleInputPage({super.key});
@@ -77,7 +78,7 @@ class _ScheduleInputPageState extends State<ScheduleInputPage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => MapPage(schedules: _schedules),
+                    builder: (context) => MapRoutePage(schedules: _schedules),
                   ),
                 );
               },
