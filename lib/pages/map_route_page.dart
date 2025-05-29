@@ -87,4 +87,14 @@ class _MapRoutePageState extends State<MapRoutePage> {
 
       try {
         final points = await RouteService.getRoute(currentLocation!, nextLatLng);
+        setState(() {
+          routePoints = points;
+        });
+      } catch (e) {
+        debugPrint("🚨 경로 요청 실패: $e");
+      }
+    }
+  }
+
+  List<Marker> _createMarkers() {
  
