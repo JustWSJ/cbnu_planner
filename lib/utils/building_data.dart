@@ -13,7 +13,8 @@ final List<Building> buildingList = [
   Building(name: "고시원(N6)", location: LatLng(36.632463, 127.455539)), // N6
   Building(name: "형설관(N7)", location: LatLng(36.632781, 127.455692)), // N7
   Building(name: "보육교사교육원(N8)", location: LatLng(36.633166, 127.456518)), // N8
-  Building(name: "언어교육관,보육교사교육원(N9)", location: LatLng(0.0, 0.0)), // N9
+  Building(
+      name: "언어교육관,보육교사교육원(N9)", location: LatLng(36.633248, 127.457065)), // N9
   Building(
       name: "대학 본부,국제교류원(N10)", location: LatLng(36.630075, 127.454613)), // N10
   Building(
@@ -24,7 +25,8 @@ final List<Building> buildingList = [
       name: "인문사회관(강의동)(N14)", location: LatLng(36.630962, 127.456515)), // N14
   Building(
       name: "사회과학대학본관(N15)", location: LatLng(36.629750, 127.457736)), // N15
-  Building(name: "인문대학본관(N16-1)", location: LatLng(0.0, 0.0)), // N16-1
+  Building(
+      name: "인문대학본관(N16-1)", location: LatLng(36.629873, 127.458945)), // N16-1
   Building(
       name: "미술관(N16-2)", location: LatLng(36.630907, 127.457365)), // N16-2
   Building(name: "미술과(N16-3)", location: LatLng(0.0, 0.0)), // N16-3
