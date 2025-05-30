@@ -6,7 +6,7 @@ import 'package:latlong2/latlong.dart';
 
 final List<Building> buildingList = [
   Building(name: "수위실(N1)", location: LatLng(0.0, 0.0)), // N1
-  Building(name: "법학전문대학원(N2)", location: LatLng(0.0, 0.0)), // N2
+  Building(name: "법학전문대학원(N2)", location: LatLng(36.631918, 127.454300)), // N2
   Building(name: "테니스장 관리실(N3)", location: LatLng(0.0, 0.0)), // N3
   Building(name: "산학협력관(N4)", location: LatLng(0.0, 0.0)), // N4
   Building(name: "평생교육원(N5)", location: LatLng(0.0, 0.0)), // N5
@@ -14,13 +14,16 @@ final List<Building> buildingList = [
   Building(name: "형설관(N7)", location: LatLng(0.0, 0.0)), // N7
   Building(name: "보육교사교육원(N8)", location: LatLng(0.0, 0.0)), // N8
   Building(name: "언어교육관,보육교사교육원(N9)", location: LatLng(0.0, 0.0)), // N9
-  Building(name: "대학 본부,국제교류원(N10)", location: LatLng(0.0, 0.0)), // N10
-  Building(name: "공동실험실습관(N11)", location: LatLng(0.0, 0.0)), // N11
-  Building(name: "중앙도서관(N12)", location: LatLng(0.0, 0.0)), // N12
+  Building(
+      name: "대학 본부,국제교류원(N10)", location: LatLng(36.630075, 127.454613)), // N10
+  Building(
+      name: "공동실험실습관(N11)", location: LatLng(36.629283, 127.455252)), // N11
+  Building(name: "중앙도서관(N12)", location: LatLng(36.628377, 127.457363)), // N12
   Building(name: "경영학관(N13)", location: LatLng(36.630032, 127.457019)), // N13
   Building(
       name: "인문사회관(강의동)(N14)", location: LatLng(36.630962, 127.456515)), // N14
-  Building(name: "사회과학대학본관(N15)", location: LatLng(0.0, 0.0)), // N15
+  Building(
+      name: "사회과학대학본관(N15)", location: LatLng(36.629750, 127.457736)), // N15
   Building(name: "인문대학본관(N16-1)", location: LatLng(0.0, 0.0)), // N16-1
   Building(
       name: "미술관(N16-2)", location: LatLng(36.630907, 127.457365)), // N16-2
