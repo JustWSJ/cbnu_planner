@@ -8,11 +8,11 @@ final List<Building> buildingList = [
   Building(name: "수위실(N1)", location: LatLng(0.0, 0.0)), // N1
   Building(name: "법학전문대학원(N2)", location: LatLng(36.631918, 127.454300)), // N2
   Building(name: "테니스장 관리실(N3)", location: LatLng(0.0, 0.0)), // N3
-  Building(name: "산학협력관(N4)", location: LatLng(0.0, 0.0)), // N4
-  Building(name: "평생교육원(N5)", location: LatLng(0.0, 0.0)), // N5
-  Building(name: "고시원(N6)", location: LatLng(0.0, 0.0)), // N6
-  Building(name: "형설관(N7)", location: LatLng(0.0, 0.0)), // N7
-  Building(name: "보육교사교육원(N8)", location: LatLng(0.0, 0.0)), // N8
+  Building(name: "산학협력관(N4)", location: LatLng(36.632529, 127.455171)), // N4
+  Building(name: "평생교육원(N5)", location: LatLng(36.632069, 127.455791)), // N5
+  Building(name: "고시원(N6)", location: LatLng(36.632463, 127.455539)), // N6
+  Building(name: "형설관(N7)", location: LatLng(36.632781, 127.455692)), // N7
+  Building(name: "보육교사교육원(N8)", location: LatLng(36.633166, 127.456518)), // N8
   Building(name: "언어교육관,보육교사교육원(N9)", location: LatLng(0.0, 0.0)), // N9
   Building(
       name: "대학 본부,국제교류원(N10)", location: LatLng(36.630075, 127.454613)), // N10
