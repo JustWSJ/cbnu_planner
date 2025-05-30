@@ -50,7 +50,7 @@ final List<Building> buildingList = [
       name: "생활과학관(N20-1)", location: LatLng(36.630437, 127.460681)), // N20-1
   Building(
       name: "생활과학대학부설ㆍ보육교사교육원어린이집(N20-2)", location: LatLng(0.0, 0.0)), // N20-2
-  Building(name: "은하수식당(N21)", location: LatLng(0.0, 0.0)), // N21
+  Building(name: "은하수식당(N21)", location: LatLng(36.629942, 127.460284)), // N21
   Building(name: "사범대학실험동(E1-1)", location: LatLng(0.0, 0.0)), // E1-1
   Building(name: "사범대학강의동(E1-2)", location: LatLng(0.0, 0.0)), // E1-2
   Building(name: "개신문화관(E2)", location: LatLng(0.0, 0.0)), // E2
