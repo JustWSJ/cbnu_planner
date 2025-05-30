@@ -31,10 +31,17 @@ final List<Building> buildingList = [
       name: "미술관(N16-2)", location: LatLng(36.630907, 127.457365)), // N16-2
   Building(name: "미술과(N16-3)", location: LatLng(0.0, 0.0)), // N16-3
   Building(name: "개성재(수위실)(N17-1)", location: LatLng(0.0, 0.0)), // N17-1
-  Building(name: "개성재 관리동(N17-2)", location: LatLng(0.0, 0.0)), // N17-2
-  Building(name: "개성재(진리관)(N17-3)", location: LatLng(0.0, 0.0)), // N17-3
-  Building(name: "개성재(정의관)(N17-4)", location: LatLng(0.0, 0.0)), // N17-4
-  Building(name: "개성재(개척관)(N17-5)", location: LatLng(0.0, 0.0)), // N17-5
+  Building(
+      name: "개성재 관리동(N17-2)", location: LatLng(36.631584, 127.457588)), // N17-2
+  Building(
+      name: "개성재(진리관)(N17-3)",
+      location: LatLng(36.631094, 127.457736)), // N17-3
+  Building(
+      name: "개성재(정의관)(N17-4)",
+      location: LatLng(36.631165, 127.458189)), // N17-4
+  Building(
+      name: "개성재(개척관)(N17-5)",
+      location: LatLng(36.631533, 127.458446)), // N17-5
   Building(name: "계영원(N17-6)", location: LatLng(0.0, 0.0)), // N17-6
   Building(name: "법학관(N18)", location: LatLng(0.0, 0.0)), // N18
   Building(name: "제2본관(N19)", location: LatLng(0.0, 0.0)), // N19
