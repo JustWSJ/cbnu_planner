@@ -58,14 +58,19 @@ final List<Building> buildingList = [
   Building(name: "건설공학관(E8-3)", location: LatLng(0.0, 0.0)), // E8-3
   Building(
       name: "제1공장동(E8-4)", location: LatLng(36.625387, 127.459012)), // E8-4
-  Building(name: "제2공장동(E8-5)", location: LatLng(0.0, 0.0)), // E8-5
-  Building(name: "토목공학관(E8-6)", location: LatLng(0.0, 0.0)), // E8-6
-  Building(name: "공대공학관(E8-7)", location: LatLng(0.0, 0.0)), // E8-7
+  Building(
+      name: "제2공장동(E8-5)", location: LatLng(36.625000, 127.458819)), // E8-5
+  Building(
+      name: "토목공학관(E8-6)", location: LatLng(36.624483, 127.458487)), // E8-6
+  Building(
+      name: "공대공학관(E8-7)", location: LatLng(36.625491, 127.457939)), // E8-7
   Building(name: "공학지원센터(E8-8)", location: LatLng(0.0, 0.0)), // E8-8
   Building(name: "신소재재료실험실(E8-9)", location: LatLng(0.0, 0.0)), // E8-9
   Building(name: "제5공학관(E8-10)", location: LatLng(0.0, 0.0)), // E8-10
-  Building(name: "학연산공동기술연구원(E9)", location: LatLng(0.0, 0.0)), // E9
-  Building(name: "학연산공동 교육관(E10)", location: LatLng(0.0, 0.0)), // E10
+  Building(
+      name: "학연산공동기술연구원(E9)", location: LatLng(36.625077, 127.457210)), // E9
+  Building(
+      name: "학연산공동 교육관(E10)", location: LatLng(36.624896, 127.457886)), // E10
   Building(name: "목장창고", location: LatLng(0.0, 0.0)), // E11-1
   Building(name: "우사", location: LatLng(0.0, 0.0)), // E11-2
   Building(name: "목장관리사", location: LatLng(0.0, 0.0)), // E11-3
@@ -73,7 +78,8 @@ final List<Building> buildingList = [
   Building(name: "동물자원연구지원센터", location: LatLng(0.0, 0.0)), // E11-5
   Building(name: "수의과대학2호관", location: LatLng(0.0, 0.0)), // E12-2
   Building(name: "수의과대학및동물의료센터", location: LatLng(0.0, 0.0)), // E12-1
-  Building(name: "실험동물연구지원센터", location: LatLng(0.0, 0.0)), // E12-3
+  Building(
+      name: "실험동물연구지원센터", location: LatLng(36.623751, 127.456201)), // E12-3
   Building(
       name: "자연과학대학본관(S1-1)", location: LatLng(36.627764, 127.456824)), // S1-1
   Building(
