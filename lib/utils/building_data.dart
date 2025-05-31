@@ -27,18 +27,14 @@ final List<Building> buildingList = [
   Building(name: "개성재 관리동(N17-2)", location: LatLng(0.0, 0.0)), // N17-2
   Building(name: "개성재(진리관)(N17-3)", location: LatLng(0.0, 0.0)), // N17-3
   Building(name: "개성재(정의관)(N17-4)", location: LatLng(0.0, 0.0)), // N17-4
-  Building(
-      name: "개성재(개척관)(N17-5)",
-      location: LatLng(36.631533, 127.458446)), // N17-5
-  Building(
-      name: "계영원(N17-6)", location: LatLng(36.631892, 127.458621)), // N17-6
-  Building(name: "법학관(N18)", location: LatLng(36.631027, 127.459334)), // N18
-  Building(name: "제2본관(N19)", location: LatLng(36.630609, 127.459940)), // N19
-  Building(
-      name: "생활과학관(N20-1)", location: LatLng(36.630437, 127.460681)), // N20-1
+  Building(name: "개성재(개척관)(N17-5)", location: LatLng(0.0, 0.0)), // N17-5
+  Building(name: "계영원(N17-6)", location: LatLng(0.0, 0.0)), // N17-6
+  Building(name: "법학관(N18)", location: LatLng(0.0, 0.0)), // N18
+  Building(name: "제2본관(N19)", location: LatLng(0.0, 0.0)), // N19
+  Building(name: "생활과학관(N20-1)", location: LatLng(0.0, 0.0)), // N20-1
   Building(
       name: "생활과학대학부설ㆍ보육교사교육원어린이집(N20-2)", location: LatLng(0.0, 0.0)), // N20-2
-  Building(name: "은하수식당(N21)", location: LatLng(36.629942, 127.460284)), // N21
+  Building(name: "은하수식당(N21)", location: LatLng(0.0, 0.0)), // N21
   Building(
       name: "사범대학실험동(E1-1)", location: LatLng(36.628935, 127.460922)), // E1-1
   Building(
@@ -50,15 +46,18 @@ final List<Building> buildingList = [
   Building(name: "운동장본부석(E4-2)", location: LatLng(0.0, 0.0)), // E4-2
   Building(
       name: "보조체육관(E4-3)", location: LatLng(36.626877, 127.462515)), // E4-3
-  Building(name: "123학군단(E5)", location: LatLng(0.0, 0.0)), // E5
+  Building(name: "123학군단(E5)", location: LatLng(36.627096, 127.461759)), // E5
   Building(name: "특고변전실(E6)", location: LatLng(0.0, 0.0)), // E6
   Building(name: "의과대학(E7-1)", location: LatLng(0.0, 0.0)), // E7-1
   Building(name: "임상 연구동(E7-2)", location: LatLng(0.0, 0.0)), // E7-2
-  Building(name: "의과대학2호관(E7-3)", location: LatLng(0.0, 0.0)), // E7-3
-  Building(name: "공학관(E8-1)", location: LatLng(0.0, 0.0)), // E8-1
-  Building(name: "합동강의실(E8-2)", location: LatLng(0.0, 0.0)), // E8-2
+  Building(
+      name: "의과대학2호관(E7-3)", location: LatLng(36.625603, 127.460160)), // E7-3
+  Building(name: "공학관(E8-1)", location: LatLng(36.626696, 127.458358)), // E8-1
+  Building(
+      name: "합동강의실(E8-2)", location: LatLng(36.626343, 127.457725)), // E8-2
   Building(name: "건설공학관(E8-3)", location: LatLng(0.0, 0.0)), // E8-3
-  Building(name: "제1공장동(E8-4)", location: LatLng(0.0, 0.0)), // E8-4
+  Building(
+      name: "제1공장동(E8-4)", location: LatLng(36.625387, 127.459012)), // E8-4
   Building(name: "제2공장동(E8-5)", location: LatLng(0.0, 0.0)), // E8-5
   Building(name: "토목공학관(E8-6)", location: LatLng(0.0, 0.0)), // E8-6
   Building(name: "공대공학관(E8-7)", location: LatLng(0.0, 0.0)), // E8-7
