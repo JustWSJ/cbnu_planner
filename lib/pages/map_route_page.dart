@@ -108,6 +108,7 @@ class _MapRoutePageState extends State<MapRoutePage> {
                 ),
                 MarkerLayer(
                   markers: [
+                    // 🔵 현재 위치
                     if (routePoints.isNotEmpty)
                       Marker(
                         point: start,
@@ -115,13 +116,20 @@ class _MapRoutePageState extends State<MapRoutePage> {
                         height: 50,
                         child: const Icon(Icons.person_pin_circle, color: Colors.blue),
                       ),
-                    for (int i = 1; i < routePoints.length; i++)
-                      Marker(
-                        point: routePoints[i],
-                        width: 50,
-                        height: 50,
-                        child: const Icon(Icons.location_on, color: Colors.red),
-                      ),
+                    // 🔴 일정 목적지 마커만 표시
+                    if (widget.schedules != null)
+                      ...widget.schedules!.map((schedule) {
+                        final building = buildingList.firstWhere(
+                          (b) => b.name == schedule.place,
+                          orElse: () => buildingList.first,
+                        );
+                        return Marker(
+                          point: building.location,
+                          width: 50,
+                          height: 50,
+                          child: const Icon(Icons.location_on, color: Colors.red),
+                        );
+                      }),
                   ],
                 ),
                 PolylineLayer(
