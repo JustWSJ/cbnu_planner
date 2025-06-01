@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:cbnu_planner/utils/building_data.dart'; // 건물 좌표
-import 'package:cbnu_planner/services/route_service.dart'; // 도보 경로 요청 함수
 import 'package:geolocator/geolocator.dart';
 
+import 'package:cbnu_planner/services/route_service.dart';
+import 'package:cbnu_planner/utils/building_data.dart';
+import 'package:cbnu_planner/models/schedule.dart';
+
 class MapRoutePage extends StatefulWidget {
-  final List<dynamic>? schedules; // 필요하면 전달받기
+  final List<Schedule>? schedules;
 
   const MapRoutePage({super.key, this.schedules});
 
@@ -16,9 +18,7 @@ class MapRoutePage extends StatefulWidget {
 
 class _MapRoutePageState extends State<MapRoutePage> {
   LatLng start = LatLng(36.6283, 127.4545);
-  LatLng end = LatLng(36.6320, 127.4582);
   List<LatLng> routePoints = [];
-
   double totalDistance = 0.0;
   int estimatedTime = 0;
 
@@ -26,16 +26,10 @@ class _MapRoutePageState extends State<MapRoutePage> {
   void initState() {
     super.initState();
 
-    end = buildingList.first.location;
-
     getCurrentLocation().then((userLocation) {
       setState(() {
         start = userLocation;
       });
-
-      print('start (현재 위치): (${start.latitude}, ${start.longitude})');
-      print('end: (${end.latitude}, ${end.longitude})');
-
       getRoute();
     }).catchError((e) {
       print('현재 위치 가져오기 실패: $e');
@@ -43,7 +37,22 @@ class _MapRoutePageState extends State<MapRoutePage> {
   }
 
   Future<void> getRoute() async {
-    final points = await RouteService.fetchWalkingRoute(start, end);
+    List<LatLng> waypoints = [start];
+
+    if (widget.schedules != null && widget.schedules!.isNotEmpty) {
+      List<Schedule> sorted = List<Schedule>.from(widget.schedules!)
+        ..sort((a, b) => a.time.hour.compareTo(b.time.hour));
+
+      for (var s in sorted) {
+        final building = buildingList.firstWhere(
+          (b) => b.name == s.place,
+          orElse: () => buildingList.first,
+        );
+        waypoints.add(building.location);
+      }
+    }
+
+    final points = await RouteService.fetchRouteWithWaypoints(waypoints);
 
     double distance = 0.0;
     if (points.length >= 2) {
@@ -56,11 +65,10 @@ class _MapRoutePageState extends State<MapRoutePage> {
     setState(() {
       routePoints = points;
       totalDistance = distance;
-      estimatedTime = (distance / 80).round(); // 시속 약 4.8km 기준
+      estimatedTime = (distance / 80).round();
     });
   }
 
-  // ✅ 여기에 추가된 현재 위치 함수
   Future<LatLng> getCurrentLocation() async {
     bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
     if (!serviceEnabled) {
@@ -100,18 +108,20 @@ class _MapRoutePageState extends State<MapRoutePage> {
                 ),
                 MarkerLayer(
                   markers: [
-                    Marker(
-                      point: start,
-                      width: 50,
-                      height: 50,
-                      child: const Icon(Icons.person_pin_circle, color: Colors.blue),
-                    ),
-                    Marker(
-                      point: end,
-                      width: 50,
-                      height: 50,
-                      child: const Icon(Icons.location_on, color: Colors.red),
-                    ),
+                    if (routePoints.isNotEmpty)
+                      Marker(
+                        point: start,
+                        width: 50,
+                        height: 50,
+                        child: const Icon(Icons.person_pin_circle, color: Colors.blue),
+                      ),
+                    for (int i = 1; i < routePoints.length; i++)
+                      Marker(
+                        point: routePoints[i],
+                        width: 50,
+                        height: 50,
+                        child: const Icon(Icons.location_on, color: Colors.red),
+                      ),
                   ],
                 ),
                 PolylineLayer(
