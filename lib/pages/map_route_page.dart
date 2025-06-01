@@ -17,7 +17,7 @@ class MapRoutePage extends StatefulWidget {
 }
 
 class _MapRoutePageState extends State<MapRoutePage> {
-  LatLng start = LatLng(36.6283, 127.4545);
+  LatLng? start;
   List<LatLng> routePoints = [];
   double totalDistance = 0.0;
   int estimatedTime = 0;
@@ -37,7 +37,9 @@ class _MapRoutePageState extends State<MapRoutePage> {
   }
 
   Future<void> getRoute() async {
-    List<LatLng> waypoints = [start];
+    if (start == null) return;
+
+    List<LatLng> waypoints = [start!];
 
     if (widget.schedules != null && widget.schedules!.isNotEmpty) {
       List<Schedule> sorted = List<Schedule>.from(widget.schedules!)
@@ -65,7 +67,7 @@ class _MapRoutePageState extends State<MapRoutePage> {
     setState(() {
       routePoints = points;
       totalDistance = distance;
-      estimatedTime = (distance / 80).round();
+      estimatedTime = (distance / 80).round(); // 도보 기준 약 80 m/min
     });
   }
 
@@ -94,13 +96,19 @@ class _MapRoutePageState extends State<MapRoutePage> {
 
   @override
   Widget build(BuildContext context) {
+    if (start == null) {
+      return const Scaffold(
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(title: const Text("도보 경로 시각화")),
       body: Column(
         children: [
           Expanded(
             child: FlutterMap(
-              options: MapOptions(center: start, zoom: 16.0),
+              options: MapOptions(center: start!, zoom: 16.0),
               children: [
                 TileLayer(
                   urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
@@ -109,14 +117,13 @@ class _MapRoutePageState extends State<MapRoutePage> {
                 MarkerLayer(
                   markers: [
                     // 🔵 현재 위치
-                    if (routePoints.isNotEmpty)
-                      Marker(
-                        point: start,
-                        width: 50,
-                        height: 50,
-                        child: const Icon(Icons.person_pin_circle, color: Colors.blue),
-                      ),
-                    // 🔴 일정 목적지 마커만 표시
+                    Marker(
+                      point: start!,
+                      width: 50,
+                      height: 50,
+                      child: const Icon(Icons.person_pin_circle, color: Colors.blue),
+                    ),
+                    // 🔴 일정 목적지 마커
                     if (widget.schedules != null)
                       ...widget.schedules!.map((schedule) {
                         final building = buildingList.firstWhere(
