@@ -1,3 +1,5 @@
+import 'dart:async'; // ← 추가
+
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
@@ -18,6 +20,7 @@ class MapPage extends StatefulWidget {
 
 class _MapPageState extends State<MapPage> {
   LatLng? currentLocation;
+  StreamSubscription<Position>? _positionStream; // 위치 스트림 저장
 
   @override
   void initState() {
@@ -32,9 +35,13 @@ class _MapPageState extends State<MapPage> {
     }
 
     if (permission == LocationPermission.always || permission == LocationPermission.whileInUse) {
-      Geolocator.getPositionStream(
-        locationSettings: const LocationSettings(accuracy: LocationAccuracy.best),
+      _positionStream = Geolocator.getPositionStream(
+        locationSettings: const LocationSettings(
+          accuracy: LocationAccuracy.best,
+          distanceFilter: 5,
+        ),
       ).listen((Position position) {
+        if (!mounted) return; // 페이지가 사라졌을 경우 방지
         setState(() {
           currentLocation = LatLng(position.latitude, position.longitude);
         });
@@ -42,7 +49,13 @@ class _MapPageState extends State<MapPage> {
     }
   }
 
- @override
+  @override
+  void dispose() {
+    _positionStream?.cancel(); // 위치 추적 중지
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('캠퍼스 지도')),
@@ -56,7 +69,8 @@ class _MapPageState extends State<MapPage> {
             urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
             userAgentPackageName: 'com.example.campus_schedule_manager',
           ),
-// 🔵 현위치 마커
+
+          // 🔵 현재 위치 마커
           if (currentLocation != null)
             MarkerLayer(
               markers: [
@@ -69,13 +83,10 @@ class _MapPageState extends State<MapPage> {
               ],
             ),
 
-          // 🔴 일정 마커
-           MarkerLayer(
+          // 🔴 일정 마커들
+          MarkerLayer(
             markers: widget.schedules.map((schedule) {
-              final coords = MapService.getBuildingCoordinates(
-                schedule.place,
-                buildingList,
-              );
+              final coords = MapService.getBuildingCoordinates(schedule.place, buildingList);
               return Marker(
                 point: coords,
                 width: 80,
