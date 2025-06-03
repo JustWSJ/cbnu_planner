@@ -8,3 +8,12 @@ class HomePage extends StatefulWidget {
   @override
   State<HomePage> createState() => _HomePageState();
 }
+
+class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 1; // 시작 탭: 지도
+  final List<Widget> _pages = [
+    const ScheduleInputPage(),
+    const MapRoutePage(),
+  ];
+
+}
