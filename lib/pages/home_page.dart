@@ -27,7 +27,16 @@ class _HomePageState extends State<HomePage> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onTap,
-        
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list),
+            label: '내 일정',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.map),
+            label: '지도',
+          ),
+        ],
       ),
     );
   }
