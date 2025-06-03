@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'pages/schedule_input_page.dart';
+import 'package:cbnu_planner/pages/home_page.dart';
 
 void main() {
   runApp(const CampusScheduleApp());
@@ -13,7 +13,7 @@ class CampusScheduleApp extends StatelessWidget {
     return MaterialApp(
       title: '스마트 캠퍼스 스케줄러',
       debugShowCheckedModeBanner: false,
-      home: const ScheduleInputPage(),
+      home: const HomePage(),
     );
   }
 }
