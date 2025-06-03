@@ -16,4 +16,19 @@ class _HomePageState extends State<HomePage> {
     const MapRoutePage(),
   ];
 
+  void _onTap(int index) {
+    setState(() => _selectedIndex = index);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: _pages[_selectedIndex],
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: _onTap,
+        
+      ),
+    );
+  }
 }
