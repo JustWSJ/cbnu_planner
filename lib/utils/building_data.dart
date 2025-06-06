@@ -219,16 +219,16 @@ final List<Building> southBuildings = [
 
 ];
 
-/// 구역별 건물들을 모아둔 맵
+/// 구역별 건물들을 모아둔 맵 (좌표가 지정된 건물만 포함)
 final Map<String, List<Building>> categorizedBuildings = {
-  'N': northBuildings,
-  'E': eastBuildings,
-  'S': southBuildings,
+  'N': northBuildings.where((b) => b.hasValidCoordinates).toList(),
+  'E': eastBuildings.where((b) => b.hasValidCoordinates).toList(),
+  'S': southBuildings.where((b) => b.hasValidCoordinates).toList(),
 };
 
-/// 모든 건물을 하나의 리스트로 제공
+/// 모든 건물을 하나의 리스트로 제공 (좌표가 지정된 건물만)
 final List<Building> buildingList = [
-  ...northBuildings,
-  ...eastBuildings,
-  ...southBuildings,
+  ...categorizedBuildings['N']!,
+  ...categorizedBuildings['E']!,
+  ...categorizedBuildings['S']!,
 ];
