@@ -79,7 +79,19 @@ class _ScheduleInputPageState extends State<ScheduleInputPage> {
 
   void _deleteSchedule(Schedule schedule) {
     setState(() {
-      _schedules.remove(schedule);
+      final idx = _schedules.indexOf(schedule);
+      _schedules.removeAt(idx);
+      if (_editingIndex != null) {
+        if (_editingIndex == idx) {
+          _editingIndex = null;
+          _titleController.clear();
+          _selectedTime = null;
+          _selectedZone = null;
+          _selectedBuilding = null;
+        } else if (_editingIndex! > idx) {
+          _editingIndex = _editingIndex! - 1;
+        }
+      }
     });
     ScheduleStorage.saveSchedules(_schedules);
   }
