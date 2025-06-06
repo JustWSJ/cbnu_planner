@@ -73,6 +73,15 @@ class _MapRoutePageState extends State<MapRoutePage> {
       }
     }
 
+    if (waypoints.length < 2) {
+      setState(() {
+        routePoints = [];
+        totalDistance = 0.0;
+        estimatedTime = 0;
+      });
+      return;
+    }
+
     final points = await RouteService.fetchRouteWithWaypoints(waypoints);
 
     double distance = 0.0;
