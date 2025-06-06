@@ -4,7 +4,6 @@ import '../models/schedule.dart';
 import '../widgets/schedule_form.dart';
 import '../widgets/schedule_list.dart';
 import '../utils/building_data.dart';
-import 'package:cbnu_planner/pages/map_route_page.dart';
 import '../services/schedule_storage.dart';
 
 class ScheduleInputPage extends StatefulWidget {
@@ -20,6 +19,7 @@ class _ScheduleInputPageState extends State<ScheduleInputPage> {
   String? _selectedZone;
   String? _selectedBuilding;
   final List<Schedule> _schedules = [];
+  int? _editingIndex;
 
   @override
   void initState() {
@@ -56,14 +56,18 @@ class _ScheduleInputPageState extends State<ScheduleInputPage> {
     }
 
     setState(() {
-      _schedules.add(
-        Schedule(
-          title: _titleController.text,
-          zone: _selectedZone!,
-          place: _selectedBuilding!,
-          time: _selectedTime!,
-        ),
+      final schedule = Schedule(
+        title: _titleController.text,
+        zone: _selectedZone!,
+        place: _selectedBuilding!,
+        time: _selectedTime!,
       );
+      if (_editingIndex != null) {
+        _schedules[_editingIndex!] = schedule;
+        _editingIndex = null;
+      } else {
+        _schedules.add(schedule);
+      }
       _titleController.clear();
       _selectedTime = null;
       _selectedZone = null;
