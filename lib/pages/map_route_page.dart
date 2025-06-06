@@ -1,130 +1,159 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:latlong2/latlong.dart';
+import 'package:geolocator/geolocator.dart';
 
-import '../models/schedule.dart';
-import '../services/map_service.dart';
-import '../utils/building_data.dart';
+import 'package:cbnu_planner/services/route_service.dart';
+import 'package:cbnu_planner/utils/building_data.dart';
+import 'package:cbnu_planner/models/schedule.dart';
 
 class MapRoutePage extends StatefulWidget {
-  final List<Schedule> schedules;
+  final List<Schedule>? schedules;
 
-  const MapRoutePage({super.key, required this.schedules});
+  const MapRoutePage({super.key, this.schedules});
 
   @override
   State<MapRoutePage> createState() => _MapRoutePageState();
 }
 
 class _MapRoutePageState extends State<MapRoutePage> {
-  LatLng? currentLocation;
+  LatLng? start;
+  List<LatLng> routePoints = [];
+  double totalDistance = 0.0;
+  int estimatedTime = 0;
 
   @override
   void initState() {
     super.initState();
-    _requestAndSetCurrentLocation();
-  }
 
-  Future<void> _requestAndSetCurrentLocation() async {
-    final permission = await Geolocator.requestPermission();
-    if (permission == LocationPermission.always ||
-        permission == LocationPermission.whileInUse) {
-      final position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.best,
-      );
+    getCurrentLocation().then((userLocation) {
       setState(() {
-        currentLocation = LatLng(position.latitude, position.longitude);
+        start = userLocation;
       });
-    }
+      getRoute();
+    }).catchError((e) {
+      print('현재 위치 가져오기 실패: $e');
+    });
   }
 
-  List<Schedule> _sortSchedulesByTime() {
-    final sorted = [...widget.schedules];
-    sorted.sort((a, b) => (a.time.hour * 60 + a.time.minute)
-        .compareTo(b.time.hour * 60 + b.time.minute));
-    return sorted;
+  Future<void> getRoute() async {
+    if (start == null) return;
+
+    List<LatLng> waypoints = [start!];
+
+    if (widget.schedules != null && widget.schedules!.isNotEmpty) {
+      List<Schedule> sorted = List<Schedule>.from(widget.schedules!)
+        ..sort((a, b) => a.time.hour.compareTo(b.time.hour));
+
+      for (var s in sorted) {
+        final building = buildingList.firstWhere(
+          (b) => b.name == s.place,
+          orElse: () => buildingList.first,
+        );
+        waypoints.add(building.location);
+      }
+    }
+
+    final points = await RouteService.fetchRouteWithWaypoints(waypoints);
+
+    double distance = 0.0;
+    if (points.length >= 2) {
+      final Distance calc = Distance();
+      for (int i = 0; i < points.length - 1; i++) {
+        distance += calc(points[i], points[i + 1]);
+      }
+    }
+
+    setState(() {
+      routePoints = points;
+      totalDistance = distance;
+      estimatedTime = (distance / 80).round(); // 도보 기준 약 80 m/min
+    });
   }
 
-  List<LatLng> _generateRoutePoints(List<Schedule> sortedSchedules) {
-    final points = sortedSchedules.map((s) {
-      final coord = MapService.getBuildingCoordinates(s.place, buildingList);
-      debugPrint('📍 ${s.place} → $coord');
-      return coord;
-    }).toList();
-
-    if (currentLocation != null) {
-      points.insert(0, currentLocation!);
+  Future<LatLng> getCurrentLocation() async {
+    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
+    if (!serviceEnabled) {
+      throw Exception("위치 서비스가 비활성화되어 있습니다.");
     }
 
-    debugPrint('📏 경로 좌표 개수: ${points.length}');
-    debugPrint('📏 경로 좌표 목록: $points');
-    return points;
-  }
-
-  List<Marker> _createMarkers(List<Schedule> sortedSchedules, List<LatLng> points) {
-    final markers = <Marker>[];
-
-    if (currentLocation != null) {
-      markers.add(
-        Marker(
-          point: currentLocation!,
-          width: 40,
-          height: 40,
-          child: const Icon(Icons.my_location, color: Colors.blue, size: 36),
-        ),
-      );
+    LocationPermission permission = await Geolocator.checkPermission();
+    if (permission == LocationPermission.denied) {
+      permission = await Geolocator.requestPermission();
+      if (permission == LocationPermission.denied) {
+        throw Exception("위치 권한이 거부되었습니다.");
+      }
     }
 
-    for (int i = 0; i < sortedSchedules.length; i++) {
-      final point = points[currentLocation != null ? i + 1 : i];
-      markers.add(
-        Marker(
-          point: point,
-          width: 80,
-          height: 80,
-          child: Column(
-            children: [
-              const Icon(Icons.location_on, color: Colors.red, size: 36),
-              Text('${i + 1}', style: const TextStyle(fontSize: 12)),
-              Text(sortedSchedules[i].title, style: const TextStyle(fontSize: 10)),
-            ],
-          ),
-        ),
-      );
+    if (permission == LocationPermission.deniedForever) {
+      throw Exception("위치 권한이 영구적으로 거부되었습니다.");
     }
 
-    return markers;
+    final position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    return LatLng(position.latitude, position.longitude);
   }
 
   @override
   Widget build(BuildContext context) {
-    final sortedSchedules = _sortSchedulesByTime();
-    final routePoints = _generateRoutePoints(sortedSchedules);
-    final markers = _createMarkers(sortedSchedules, routePoints);
+    if (start == null) {
+      return const Scaffold(
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
 
     return Scaffold(
-      appBar: AppBar(title: const Text('이동 경로 보기')),
-      body: FlutterMap(
-        options: MapOptions(
-          center: routePoints.isNotEmpty ? routePoints.first : LatLng(36.6282, 127.4562),
-          zoom: 17.0,
-        ),
+      appBar: AppBar(title: const Text("도보 경로 시각화")),
+      body: Column(
         children: [
-          TileLayer(
-            urlTemplate: 'https://tile.openstreetmap.org/{z}/{x}/{y}.png',
-            userAgentPackageName: 'com.example.cbnu_planner',
-          ),
-          if (routePoints.length >= 2)
-            PolylineLayer(
-              polylines: [
-                Polyline(
-                  points: routePoints,
-                  strokeWidth: 4.0,
-                  color: Colors.blueAccent,
+          Expanded(
+            child: FlutterMap(
+              options: MapOptions(center: start!, zoom: 16.0),
+              children: [
+                TileLayer(
+                  urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                  userAgentPackageName: 'com.example.app',
+                ),
+                MarkerLayer(
+                  markers: [
+                    // 🔵 현재 위치
+                    Marker(
+                      point: start!,
+                      width: 50,
+                      height: 50,
+                      child: const Icon(Icons.person_pin_circle, color: Colors.blue),
+                    ),
+                    // 🔴 일정 목적지 마커
+                    if (widget.schedules != null)
+                      ...widget.schedules!.map((schedule) {
+                        final building = buildingList.firstWhere(
+                          (b) => b.name == schedule.place,
+                          orElse: () => buildingList.first,
+                        );
+                        return Marker(
+                          point: building.location,
+                          width: 50,
+                          height: 50,
+                          child: const Icon(Icons.location_on, color: Colors.red),
+                        );
+                      }),
+                  ],
+                ),
+                PolylineLayer(
+                  polylines: [
+                    Polyline(points: routePoints, color: Colors.green, strokeWidth: 5.0),
+                  ],
                 ),
               ],
             ),
-          MarkerLayer(markers: markers),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: Text(
+              '총 거리: ${totalDistance.toStringAsFixed(1)} m / 예상 시간: ${estimatedTime}분',
+              style: const TextStyle(fontSize: 16),
+            ),
+          ),
         ],
       ),
     );
