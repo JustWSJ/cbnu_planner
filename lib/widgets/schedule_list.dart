@@ -37,7 +37,7 @@ class ScheduleList extends StatelessWidget {
             child: ListTile(
               title: Text(schedule.title),
               subtitle: Text(
-                '${schedule.time.format(context)} | 이동 ${travelTime}분',
+                '${schedule.time.format(context)} | 이동 예상 시간: ${travelTime}분',
               ),
               trailing: PopupMenuButton<String>(
                 onSelected: (value) {
