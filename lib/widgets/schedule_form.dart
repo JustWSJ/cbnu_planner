@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 
 class ScheduleForm extends StatelessWidget {
   final TextEditingController titleController;
+  final String? selectedZone;
   final String? selectedBuilding;
-  final List<String> buildings;
+  final Map<String, List<String>> buildingsByZone;
   final TimeOfDay? selectedTime;
   final VoidCallback onPickTime;
+  final Function(String?) onZoneChanged;
   final Function(String?) onBuildingChanged;
   final VoidCallback onSubmit;
 
