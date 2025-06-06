@@ -15,10 +15,12 @@ class ScheduleForm extends StatelessWidget {
   const ScheduleForm({
     super.key,
     required this.titleController,
+    required this.selectedZone,
     required this.selectedBuilding,
-    required this.buildings,
+    required this.buildingsByZone,
     required this.selectedTime,
     required this.onPickTime,
+    required this.onZoneChanged,
     required this.onBuildingChanged,
     required this.onSubmit,
   });
