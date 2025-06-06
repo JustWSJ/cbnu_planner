@@ -3,10 +3,16 @@ import 'package:flutter/material.dart';
 
 class Schedule {
   final String title;
+  final String zone;
   final String place;
   final TimeOfDay time;
 
-  Schedule({required this.title, required this.place, required this.time});
+  Schedule({
+    required this.title,
+    required this.zone,
+    required this.place,
+    required this.time,
+  });
 
   Map<String, dynamic> toMap() {
     return {
