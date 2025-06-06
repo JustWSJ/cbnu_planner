@@ -92,33 +92,45 @@ final List<Building> buildingList = [
   Building(name: "법학관(N18)", location: LatLng(0.0, 0.0)), // N18
   Building(name: "제2본관(N19)", location: LatLng(0.0, 0.0)), // N19
   Building(name: "생활과학관(N20-1)", location: LatLng(0.0, 0.0)), // N20-1
-  Building(name: "생활과학대학부설ㆍ보육교사교육원어린이집(N20-2)", location: LatLng(0.0, 0.0)), // N20-2
+  Building(
+      name: "생활과학대학부설ㆍ보육교사교육원어린이집(N20-2)", location: LatLng(0.0, 0.0)), // N20-2
   Building(name: "은하수식당(N21)", location: LatLng(0.0, 0.0)), // N21
-  Building(name: "사범대학실험동(E1-1)", location: LatLng(0.0, 0.0)), // E1-1
-  Building(name: "사범대학강의동(E1-2)", location: LatLng(0.0, 0.0)), // E1-2
-  Building(name: "개신문화관(E2)", location: LatLng(0.0, 0.0)), // E2
+  Building(
+      name: "사범대학실험동(E1-1)", location: LatLng(36.628935, 127.460922)), // E1-1
+  Building(
+      name: "사범대학강의동(E1-2)", location: LatLng(36.628461, 127.460332)), // E1-2
+  Building(name: "개신문화관(E2)", location: LatLng(36.628263, 127.459495)), // E2
   Building(name: "제1학생회관(E3)", location: LatLng(0.0, 0.0)), // E3
-  Building(name: "NH관(E3-1)", location: LatLng(0.0, 0.0)), // E3-1
+  Building(name: "NH관(E3-1)", location: LatLng(36.627234, 127.459366)), // E3-1
   Building(name: "실내체육관(E4-1)", location: LatLng(0.0, 0.0)), // E4-1
   Building(name: "운동장본부석(E4-2)", location: LatLng(0.0, 0.0)), // E4-2
-  Building(name: "보조체육관(E4-3)", location: LatLng(0.0, 0.0)), // E4-3
-  Building(name: "123학군단(E5)", location: LatLng(0.0, 0.0)), // E5
+  Building(
+      name: "보조체육관(E4-3)", location: LatLng(36.626877, 127.462515)), // E4-3
+  Building(name: "123학군단(E5)", location: LatLng(36.627096, 127.461759)), // E5
   Building(name: "특고변전실(E6)", location: LatLng(0.0, 0.0)), // E6
   Building(name: "의과대학(E7-1)", location: LatLng(0.0, 0.0)), // E7-1
   Building(name: "임상 연구동(E7-2)", location: LatLng(0.0, 0.0)), // E7-2
-  Building(name: "의과대학2호관(E7-3)", location: LatLng(0.0, 0.0)), // E7-3
-  Building(name: "공학관(E8-1)", location: LatLng(0.0, 0.0)), // E8-1
-  Building(name: "합동강의실(E8-2)", location: LatLng(0.0, 0.0)), // E8-2
+  Building(
+      name: "의과대학2호관(E7-3)", location: LatLng(36.625603, 127.460160)), // E7-3
+  Building(name: "공학관(E8-1)", location: LatLng(36.626696, 127.458358)), // E8-1
+  Building(
+      name: "합동강의실(E8-2)", location: LatLng(36.626343, 127.457725)), // E8-2
   Building(name: "건설공학관(E8-3)", location: LatLng(0.0, 0.0)), // E8-3
-  Building(name: "제1공장동(E8-4)", location: LatLng(0.0, 0.0)), // E8-4
-  Building(name: "제2공장동(E8-5)", location: LatLng(0.0, 0.0)), // E8-5
-  Building(name: "토목공학관(E8-6)", location: LatLng(0.0, 0.0)), // E8-6
-  Building(name: "공대공학관(E8-7)", location: LatLng(0.0, 0.0)), // E8-7
+  Building(
+      name: "제1공장동(E8-4)", location: LatLng(36.625387, 127.459012)), // E8-4
+  Building(
+      name: "제2공장동(E8-5)", location: LatLng(36.625000, 127.458819)), // E8-5
+  Building(
+      name: "토목공학관(E8-6)", location: LatLng(36.624483, 127.458487)), // E8-6
+  Building(
+      name: "공대공학관(E8-7)", location: LatLng(36.625491, 127.457939)), // E8-7
   Building(name: "공학지원센터(E8-8)", location: LatLng(0.0, 0.0)), // E8-8
   Building(name: "신소재재료실험실(E8-9)", location: LatLng(0.0, 0.0)), // E8-9
   Building(name: "제5공학관(E8-10)", location: LatLng(0.0, 0.0)), // E8-10
-  Building(name: "학연산공동기술연구원(E9)", location: LatLng(0.0, 0.0)), // E9
-  Building(name: "학연산공동 교육관(E10)", location: LatLng(0.0, 0.0)), // E10
+  Building(
+      name: "학연산공동기술연구원(E9)", location: LatLng(36.625077, 127.457210)), // E9
+  Building(
+      name: "학연산공동 교육관(E10)", location: LatLng(36.624896, 127.457886)), // E10
   Building(name: "목장창고", location: LatLng(0.0, 0.0)), // E11-1
   Building(name: "우사", location: LatLng(0.0, 0.0)), // E11-2
   Building(name: "목장관리사", location: LatLng(0.0, 0.0)), // E11-3
@@ -126,6 +138,4 @@ final List<Building> buildingList = [
   Building(name: "동물자원연구지원센터", location: LatLng(0.0, 0.0)), // E11-5
   Building(name: "수의과대학2호관", location: LatLng(0.0, 0.0)), // E12-2
   Building(name: "수의과대학및동물의료센터", location: LatLng(0.0, 0.0)), // E12-1
-  Building(name: "실험동물연구지원센터", location: LatLng(0.0, 0.0)), // E12-3
-  
 ];
