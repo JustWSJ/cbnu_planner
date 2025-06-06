@@ -44,6 +44,7 @@ class _ScheduleInputPageState extends State<ScheduleInputPage> {
       _schedules.addAll(loaded);
     });
     _removeExpiredSchedules();
+    _sortSchedules();
   }
 
   void _pickTime() async {
@@ -88,6 +89,7 @@ class _ScheduleInputPageState extends State<ScheduleInputPage> {
 
     ScheduleStorage.saveSchedules(_schedules);
     _removeExpiredSchedules();
+    _sortSchedules();
   }
 
   void _deleteSchedule(Schedule schedule) {
@@ -107,6 +109,7 @@ class _ScheduleInputPageState extends State<ScheduleInputPage> {
       }
     });
     ScheduleStorage.saveSchedules(_schedules);
+  _sortSchedules();
   }
 
   void _removeExpiredSchedules() {
@@ -119,6 +122,15 @@ class _ScheduleInputPageState extends State<ScheduleInputPage> {
       });
     });
     ScheduleStorage.saveSchedules(_schedules);
+    _sortSchedules();
+  }
+
+  void _sortSchedules() {
+    _schedules.sort((a, b) {
+      final aMinutes = a.time.hour * 60 + a.time.minute;
+      final bMinutes = b.time.hour * 60 + b.time.minute;
+      return aMinutes.compareTo(bMinutes);
+    });
   }
 
   void _editSchedule(Schedule schedule) {
