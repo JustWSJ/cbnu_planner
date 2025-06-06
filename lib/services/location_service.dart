@@ -26,4 +26,15 @@ class LocationService {
       ).map((p) => LatLng(p.latitude, p.longitude));
     }
   }
+
+  static Future<LatLng> getCurrentLocation() async {
+    final permission = await _ensurePermission();
+    if (permission == LocationPermission.denied ||
+        permission == LocationPermission.deniedForever) {
+      throw Exception('위치 권한이 거부되었습니다.');
+    }
+    final position = await Geolocator.getCurrentPosition(
+        desiredAccuracy: LocationAccuracy.high);
+    return LatLng(position.latitude, position.longitude);
+  }
 }
