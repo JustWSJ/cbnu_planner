@@ -17,6 +17,7 @@ class Schedule {
   Map<String, dynamic> toMap() {
     return {
       'title': title,
+      'zone': zone,
       'place': place,
       'hour': time.hour,
       'minute': time.minute,
@@ -26,6 +27,7 @@ class Schedule {
    factory Schedule.fromMap(Map<String, dynamic> map) {
     return Schedule(
       title: map['title'] as String,
+      zone: map['zone'] as String,
       place: map['place'] as String,
       time: TimeOfDay(hour: map['hour'] as int, minute: map['minute'] as int),
     );
