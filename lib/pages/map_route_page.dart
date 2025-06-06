@@ -130,12 +130,10 @@ class _MapRoutePageState extends State<MapRoutePage> {
                     // 🔴 일정 목적지 마커
                     if (schedules.isNotEmpty)
                       ...schedules.map((schedule) {
-                        final building = buildingList.firstWhere(
-                          (b) => b.name == schedule.place,
-                          orElse: () => buildingList.first,
-                        );
+                        final coord = MapService.getBuildingCoordinates(
+                            schedule.place, buildingList);
                         return Marker(
-                          point: building.location,
+                          point: coord,
                           width: 50,
                           height: 50,
                           child: const Icon(Icons.location_on, color: Colors.red),
