@@ -18,4 +18,12 @@ class ScheduleList extends StatelessWidget {
         return ListTile(
           title: Text(schedule.title),
           subtitle: Text('${schedule.place} - ${schedule.time.format(context)}'),
-   
+          trailing: IconButton(
+            icon: const Icon(Icons.delete, color: Colors.red),
+            onPressed: () => onDelete(schedule), // 🔸 삭제 동작 연결
+          ),
+        );
+      }).toList(),
+    );
+  }
+}
