@@ -83,10 +83,18 @@ class _ScheduleInputPageState extends State<ScheduleInputPage> {
           children: [
             ScheduleForm(
               titleController: _titleController,
+              selectedZone: _selectedZone,
               selectedBuilding: _selectedBuilding,
-              buildings: buildingList.map((b) => b.name).toList(),
+              buildingsByZone: {
+                for (var entry in categorizedBuildings.entries)
+                  entry.key: entry.value.map((b) => b.name).toList()
+              },
               selectedTime: _selectedTime,
               onPickTime: _pickTime,
+              onZoneChanged: (value) => setState(() {
+                _selectedZone = value;
+                _selectedBuilding = null;
+              }),
               onBuildingChanged:
                   (value) => setState(() => _selectedBuilding = value),
               onSubmit: _submitSchedule,
