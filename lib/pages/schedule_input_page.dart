@@ -96,6 +96,16 @@ class _ScheduleInputPageState extends State<ScheduleInputPage> {
     ScheduleStorage.saveSchedules(_schedules);
   }
 
+  void _editSchedule(Schedule schedule) {
+    setState(() {
+      _editingIndex = _schedules.indexOf(schedule);
+      _titleController.text = schedule.title;
+      _selectedZone = schedule.zone;
+      _selectedBuilding = schedule.place;
+      _selectedTime = schedule.time;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
