@@ -25,23 +25,30 @@ class ScheduleList extends StatelessWidget {
         return Container(
           margin: const EdgeInsets.symmetric(vertical: 4),
           decoration: BoxDecoration(
-            color: Colors.blue.shade50,
+            color: const Color.fromARGB(255, 255, 255, 255),
             borderRadius: BorderRadius.circular(8),
+            border: Border.all(color: const Color.fromARGB(255, 0, 0, 0)),
           ),
-          child: ListTile(
-            title: Text(schedule.title),
-            subtitle: Text(
-              '${schedule.time.format(context)} | 이동 ${travelTime}분',
-            ),
-            trailing: PopupMenuButton<String>(
-              onSelected: (value) {
-                if (value == 'edit') onEdit(schedule);
-                if (value == 'delete') onDelete(schedule);
-              },
-              itemBuilder: (context) => const [
-                PopupMenuItem(value: 'edit', child: Text('수정')),
-                PopupMenuItem(value: 'delete', child: Text('삭제')),
+          child: InkWell(
+            borderRadius: BorderRadius.circular(8),
+            highlightColor: Colors.red.withOpacity(0.3),
+            splashColor: Colors.red.withOpacity(0.2),
+            onTap: () {},
+            child: ListTile(
+              title: Text(schedule.title),
+              subtitle: Text(
+                '${schedule.time.format(context)} | 이동 ${travelTime}분',
+              ),
+              trailing: PopupMenuButton<String>(
+                onSelected: (value) {
+                  if (value == 'edit') onEdit(schedule);
+                  if (value == 'delete') onDelete(schedule);
+                },
+                itemBuilder: (context) => const [
+                  PopupMenuItem(value: 'edit', child: Text('수정')),
+                  PopupMenuItem(value: 'delete', child: Text('삭제')),
               ],
+              ),
             ),
           ),
         );
