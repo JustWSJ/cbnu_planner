@@ -10,4 +10,9 @@ class LocationService {
     }
     return permission;
   }
+
+  static Stream<LatLng> locationStream({
+    LocationAccuracy accuracy = LocationAccuracy.best,
+    int distanceFilter = 5,
+  })s
 }
