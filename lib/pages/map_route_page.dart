@@ -22,19 +22,37 @@ class _MapRoutePageState extends State<MapRoutePage> {
   List<LatLng> routePoints = [];
   double totalDistance = 0.0;
   int estimatedTime = 0;
+  List<Schedule> schedules = [];
 
   @override
   void initState() {
     super.initState();
 
+    if (widget.schedules != null) {
+      schedules = List<Schedule>.from(widget.schedules!);
+    } else {
+      ScheduleStorage.loadSchedules().then((value) {
+        setState(() {
+          schedules = value;
+        });
+        _tryGetRoute();
+      });
+    }
+
     getCurrentLocation().then((userLocation) {
       setState(() {
         start = userLocation;
       });
-      getRoute();
+      _tryGetRoute();
     }).catchError((e) {
       print('현재 위치 가져오기 실패: $e');
     });
+  }
+
+  void _tryGetRoute() {
+    if (start != null) {
+      getRoute();
+    }
   }
 
   Future<void> getRoute() async {
