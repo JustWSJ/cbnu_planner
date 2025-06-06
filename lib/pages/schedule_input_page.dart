@@ -19,7 +19,14 @@ class _ScheduleInputPageState extends State<ScheduleInputPage> {
   final TextEditingController _titleController = TextEditingController();
   TimeOfDay? _selectedTime;
   String? _selectedBuilding;
-  final List<Schedule> _schedules = [];
+  final List<Schedule> _schedules = [];s
+
+  Future<void> _loadSchedules() async {
+    final loaded = await ScheduleStorage.loadSchedules();
+    setState(() {
+      _schedules.addAll(loaded);
+    });
+  }
 
   void _pickTime() async {
     final picked = await showTimePicker(
