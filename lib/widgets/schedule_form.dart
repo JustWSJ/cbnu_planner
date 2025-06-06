@@ -10,6 +10,7 @@ class ScheduleForm extends StatelessWidget {
   final Function(String?) onZoneChanged;
   final Function(String?) onBuildingChanged;
   final VoidCallback onSubmit;
+  final String submitText;
 
   const ScheduleForm({
     super.key,
@@ -22,6 +23,7 @@ class ScheduleForm extends StatelessWidget {
     required this.onZoneChanged,
     required this.onBuildingChanged,
     required this.onSubmit,
+    this.submitText = '일정 추가',
   });
 
   @override
@@ -65,7 +67,7 @@ class ScheduleForm extends StatelessWidget {
           ],
         ),
         const SizedBox(height: 20),
-        ElevatedButton(onPressed: onSubmit, child: const Text('일정 추가')),
+        ElevatedButton(onPressed: onSubmit, child: Text(submitText)),
       ],
     );
   }
