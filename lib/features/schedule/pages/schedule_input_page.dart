@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../models/schedule.dart';
 import '../widgets/schedule_form.dart';
 import '../widgets/schedule_list.dart';
-import '../utils/building_data.dart';
+import '../../map/data/building_data.dart';
 import '../services/schedule_storage.dart';
 
 class ScheduleInputPage extends StatefulWidget {

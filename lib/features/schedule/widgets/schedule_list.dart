@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:latlong2/latlong.dart';
 import '../models/schedule.dart';
-import '../services/map_service.dart';
+import '../../map/services/map_service.dart';
 
 class ScheduleList extends StatelessWidget {
   final List<Schedule> schedules;
