@@ -19,7 +19,13 @@ class _ScheduleInputPageState extends State<ScheduleInputPage> {
   final TextEditingController _titleController = TextEditingController();
   TimeOfDay? _selectedTime;
   String? _selectedBuilding;
-  final List<Schedule> _schedules = [];s
+  final List<Schedule> _schedules = [];
+
+   @override
+  void initState() {
+    super.initState();
+    _loadSchedules();
+  }
 
   Future<void> _loadSchedules() async {
     final loaded = await ScheduleStorage.loadSchedules();
