@@ -66,8 +66,10 @@ class _MapRoutePageState extends State<MapRoutePage> {
         ..sort((a, b) => a.time.hour.compareTo(b.time.hour));
 
       for (var s in sorted) {
-        final coord =
-            MapService.getBuildingCoordinates(s.place, buildingList);
+        final coord = MapService.getBuildingCoordinates(
+          s.zone,
+          s.place,
+        );
         waypoints.add(coord);
       }
     }
@@ -131,7 +133,9 @@ class _MapRoutePageState extends State<MapRoutePage> {
                     if (schedules.isNotEmpty)
                       ...schedules.map((schedule) {
                         final coord = MapService.getBuildingCoordinates(
-                            schedule.place, buildingList);
+                          schedule.zone,
+                          schedule.place,
+                        );
                         return Marker(
                           point: coord,
                           width: 50,
