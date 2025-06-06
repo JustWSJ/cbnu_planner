@@ -1,4 +1,4 @@
-//  일정 입력 화면
+// 일정 입력 화면
 import 'package:flutter/material.dart';
 import '../models/schedule.dart';
 import '../widgets/schedule_form.dart';
@@ -6,7 +6,6 @@ import '../widgets/schedule_list.dart';
 import '../utils/building_data.dart';
 import 'package:cbnu_planner/pages/map_route_page.dart';
 import '../services/schedule_storage.dart';
-
 
 class ScheduleInputPage extends StatefulWidget {
   const ScheduleInputPage({super.key});
@@ -21,7 +20,7 @@ class _ScheduleInputPageState extends State<ScheduleInputPage> {
   String? _selectedBuilding;
   final List<Schedule> _schedules = [];
 
-   @override
+  @override
   void initState() {
     super.initState();
     _loadSchedules();
@@ -48,9 +47,9 @@ class _ScheduleInputPageState extends State<ScheduleInputPage> {
     if (_titleController.text.isEmpty ||
         _selectedBuilding == null ||
         _selectedTime == null) {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('모든 항목을 입력해주세요')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('모든 항목을 입력해주세요')),
+      );
       return;
     }
 
@@ -65,6 +64,14 @@ class _ScheduleInputPageState extends State<ScheduleInputPage> {
       _titleController.clear();
       _selectedTime = null;
       _selectedBuilding = null;
+    });
+
+    ScheduleStorage.saveSchedules(_schedules);
+  }
+
+  void _deleteSchedule(Schedule schedule) {
+    setState(() {
+      _schedules.remove(schedule);
     });
     ScheduleStorage.saveSchedules(_schedules);
   }
@@ -100,7 +107,10 @@ class _ScheduleInputPageState extends State<ScheduleInputPage> {
               child: const Text('지도 보기'),
             ),
             const SizedBox(height: 20),
-            ScheduleList(schedules: _schedules),
+            ScheduleList(
+              schedules: _schedules,
+              onDelete: _deleteSchedule, // 🔥 삭제 콜백 연결
+            ),
           ],
         ),
       ),
