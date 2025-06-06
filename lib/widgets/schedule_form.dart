@@ -46,10 +46,11 @@ class ScheduleForm extends StatelessWidget {
         DropdownButton<String>(
           hint: const Text('건물 선택'),
           value: selectedBuilding,
-          items:
-              buildings
-                  .map((b) => DropdownMenuItem(value: b, child: Text(b)))
-                  .toList(),
+          items: (selectedZone != null
+                  ? buildingsByZone[selectedZone] ?? []
+                  : [])
+              .map((b) => DropdownMenuItem(value: b, child: Text(b)))
+              .toList(),
           onChanged: onBuildingChanged,
         ),
         const SizedBox(height: 12),
