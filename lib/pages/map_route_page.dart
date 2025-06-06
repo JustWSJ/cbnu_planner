@@ -6,6 +6,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:cbnu_planner/services/route_service.dart';
 import 'package:cbnu_planner/utils/building_data.dart';
 import 'package:cbnu_planner/models/schedule.dart';
+import '../services/schedule_storage.dart';
 
 class MapRoutePage extends StatefulWidget {
   final List<Schedule>? schedules;
