@@ -24,6 +24,7 @@ class _MapRoutePageState extends State<MapRoutePage> {
   double totalDistance = 0.0;
   int estimatedTime = 0;
   List<Schedule> schedules = [];
+  int? _selectedIndex;
 
   @override
   void initState() {
@@ -129,7 +130,11 @@ class _MapRoutePageState extends State<MapRoutePage> {
         children: [
           Expanded(
             child: FlutterMap(
-              options: MapOptions(center: start!, zoom: 16.0),
+              options: MapOptions(
+                center: start!,
+                zoom: 16.0,
+                onTap: (_, __) => setState(() => _selectedIndex = null),
+              ),
               children: [
                 TileLayer(
                   urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
@@ -157,22 +162,34 @@ class _MapRoutePageState extends State<MapRoutePage> {
                           point: coord,
                           width: 120,
                           height: 80,
-                          child: Column(
-                            children: [
-                              const Icon(Icons.location_on, color: Colors.red),
-                              Container(
-                                padding: const EdgeInsets.all(2),
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(4),
-                                ),
-                                child: Text(
-                                  '${schedule.place}\n${travelTime}분',
-                                  textAlign: TextAlign.center,
-                                  style: const TextStyle(fontSize: 12),
-                                ),
-                              ),
-                            ],
+                          child: GestureDetector(
+                            onTap: () => setState(() => _selectedIndex = index),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                if (_selectedIndex == index)
+                                  Container(
+                                    margin: const EdgeInsets.only(bottom: 4),
+                                    padding: const EdgeInsets.all(4),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(4),
+                                      boxShadow: const [
+                                        BoxShadow(
+                                          color: Colors.black26,
+                                          blurRadius: 4,
+                                        ),
+                                      ],
+                                    ),
+                                    child: Text(
+                                      '${schedule.place}\n${travelTime}분',
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(fontSize: 12),
+                                    ),
+                                  ),
+                                const Icon(Icons.location_on, color: Colors.red),
+                              ],
+                            ),
                           ),
                         );
                       }),
