@@ -131,23 +131,13 @@ class _ScheduleInputPageState extends State<ScheduleInputPage> {
               onBuildingChanged:
                   (value) => setState(() => _selectedBuilding = value),
               onSubmit: _submitSchedule,
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => MapRoutePage(schedules: _schedules),
-                  ),
-                );
-              },
-              child: const Text('지도 보기'),
+              submitText: _editingIndex != null ? '수정 완료' : '일정 추가',
             ),
             const SizedBox(height: 20),
             ScheduleList(
               schedules: _schedules,
-              onDelete: _deleteSchedule, // 🔥 삭제 콜백 연결
+              onDelete: _deleteSchedule,
+              onEdit: _editSchedule,
             ),
           ],
         ),
