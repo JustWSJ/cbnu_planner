@@ -72,7 +72,10 @@ class _MapPageState extends State<MapPage> {
           // 🔴 일정 마커들
           MarkerLayer(
             markers: widget.schedules.map((schedule) {
-              final coords = MapService.getBuildingCoordinates(schedule.place, buildingList);
+              final coords = MapService.getBuildingCoordinates(
+                schedule.zone,
+                schedule.place,
+              );
               return Marker(
                 point: coords,
                 width: 80,
