@@ -1,4 +1,5 @@
 // 일정 입력 화면
+import 'dart:async';
 import 'package:flutter/material.dart';
 import '../models/schedule.dart';
 import '../widgets/schedule_form.dart';
@@ -20,11 +21,21 @@ class _ScheduleInputPageState extends State<ScheduleInputPage> {
   String? _selectedBuilding;
   final List<Schedule> _schedules = [];
   int? _editingIndex;
+  Timer? _cleanupTimer;
 
   @override
   void initState() {
     super.initState();
     _loadSchedules();
+    _cleanupTimer =
+        Timer.periodic(const Duration(minutes: 1), (_) => _removeExpiredSchedules());
+  }
+
+  @override
+  void dispose() {
+    _cleanupTimer?.cancel();
+    _titleController.dispose();
+    super.dispose();
   }
 
   Future<void> _loadSchedules() async {
@@ -32,6 +43,7 @@ class _ScheduleInputPageState extends State<ScheduleInputPage> {
     setState(() {
       _schedules.addAll(loaded);
     });
+    _removeExpiredSchedules();
   }
 
   void _pickTime() async {
@@ -75,6 +87,7 @@ class _ScheduleInputPageState extends State<ScheduleInputPage> {
     });
 
     ScheduleStorage.saveSchedules(_schedules);
+    _removeExpiredSchedules();
   }
 
   void _deleteSchedule(Schedule schedule) {
@@ -92,6 +105,18 @@ class _ScheduleInputPageState extends State<ScheduleInputPage> {
           _editingIndex = _editingIndex! - 1;
         }
       }
+    });
+    ScheduleStorage.saveSchedules(_schedules);
+  }
+
+  void _removeExpiredSchedules() {
+    final now = TimeOfDay.now();
+    final nowMinutes = now.hour * 60 + now.minute;
+    setState(() {
+      _schedules.removeWhere((s) {
+        final sMinutes = s.time.hour * 60 + s.time.minute;
+        return sMinutes < nowMinutes;
+      });
     });
     ScheduleStorage.saveSchedules(_schedules);
   }
