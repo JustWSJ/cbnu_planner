@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:latlong2/latlong.dart';
 import '../models/schedule.dart';
+import '../services/map_service.dart';
 
 class ScheduleList extends StatelessWidget {
   final List<Schedule> schedules;
-  final void Function(Schedule) onDelete; // 🔹 삭제 콜백 추가
+  final void Function(Schedule) onDelete;
+
+  final void Function(Schedule) onEdit;
 
   const ScheduleList({
     super.key,
     required this.schedules,
     required this.onDelete,
+    required this.onEdit,
   });
 
   @override
