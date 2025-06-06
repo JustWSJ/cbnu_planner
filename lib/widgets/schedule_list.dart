@@ -7,3 +7,15 @@ class ScheduleList extends StatelessWidget {
 
   const ScheduleList({
     super.key,
+    required this.schedules,
+    required this.onDelete,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: schedules.map((schedule) {
+        return ListTile(
+          title: Text(schedule.title),
+          subtitle: Text('${schedule.place} - ${schedule.time.format(context)}'),
+   
