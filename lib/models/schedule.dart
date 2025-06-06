@@ -16,4 +16,12 @@ class Schedule {
       'minute': time.minute,
     };
   }
+
+   factory Schedule.fromMap(Map<String, dynamic> map) {
+    return Schedule(
+      title: map['title'] as String,
+      place: map['place'] as String,
+      time: TimeOfDay(hour: map['hour'] as int, minute: map['minute'] as int),
+    );
+  }
 }
