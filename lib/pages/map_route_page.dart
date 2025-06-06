@@ -60,8 +60,8 @@ class _MapRoutePageState extends State<MapRoutePage> {
 
     List<LatLng> waypoints = [start!];
 
-    if (widget.schedules != null && widget.schedules!.isNotEmpty) {
-      List<Schedule> sorted = List<Schedule>.from(widget.schedules!)
+    if (schedules.isNotEmpty) {
+      List<Schedule> sorted = List<Schedule>.from(schedules)
         ..sort((a, b) => a.time.hour.compareTo(b.time.hour));
 
       for (var s in sorted) {
@@ -143,8 +143,8 @@ class _MapRoutePageState extends State<MapRoutePage> {
                       child: const Icon(Icons.person_pin_circle, color: Colors.blue),
                     ),
                     // 🔴 일정 목적지 마커
-                    if (widget.schedules != null)
-                      ...widget.schedules!.map((schedule) {
+                    if (schedules.isNotEmpty)
+                      ...schedules.map((schedule) {
                         final building = buildingList.firstWhere(
                           (b) => b.name == schedule.place,
                           orElse: () => buildingList.first,
