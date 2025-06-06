@@ -218,3 +218,10 @@ final List<Building> southBuildings = [
       location: LatLng(36.630773, 127.452382)), // S21-24
 
 ];
+
+/// 구역별 건물들을 모아둔 맵
+final Map<String, List<Building>> categorizedBuildings = {
+  'N': northBuildings,
+  'E': eastBuildings,
+  'S': southBuildings,
+};
