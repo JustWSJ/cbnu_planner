@@ -1,28 +1,29 @@
-//  일정 리스트 보기
 import 'package:flutter/material.dart';
 import '../models/schedule.dart';
 
 class ScheduleList extends StatelessWidget {
   final List<Schedule> schedules;
+  final void Function(Schedule) onDelete; // 🔹 삭제 콜백 추가
 
-  const ScheduleList({super.key, required this.schedules});
+  const ScheduleList({
+    super.key,
+    required this.schedules,
+    required this.onDelete,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
-        itemCount: schedules.length,
-        itemBuilder: (context, index) {
-          final schedule = schedules[index];
-          return ListTile(
-            leading: const Icon(Icons.event_note),
-            title: Text(schedule.title),
-            subtitle: Text(
-              '${schedule.place} - ${schedule.time.format(context)}',
-            ),
-          );
-        },
-      ),
+    return Column(
+      children: schedules.map((schedule) {
+        return ListTile(
+          title: Text(schedule.title),
+          subtitle: Text('${schedule.place} - ${schedule.time.format(context)}'),
+          trailing: IconButton(
+            icon: const Icon(Icons.delete, color: Colors.red),
+            onPressed: () => onDelete(schedule), // 🔸 삭제 동작 연결
+          ),
+        );
+      }).toList(),
     );
   }
 }
