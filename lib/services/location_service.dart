@@ -14,5 +14,16 @@ class LocationService {
   static Stream<LatLng> locationStream({
     LocationAccuracy accuracy = LocationAccuracy.best,
     int distanceFilter = 5,
-  })s
+  }) async* {
+    final permission = await _ensurePermission();
+    if (permission == LocationPermission.always ||
+        permission == LocationPermission.whileInUse) {
+      yield* Geolocator.getPositionStream(
+        locationSettings: LocationSettings(
+          accuracy: accuracy,
+          distanceFilter: distanceFilter,
+        ),
+      ).map((p) => LatLng(p.latitude, p.longitude));
+    }
+  }
 }
