@@ -19,13 +19,30 @@ class ScheduleList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      children: schedules.map((schedule) {
-        return ListTile(
-          title: Text(schedule.title),
-          subtitle: Text('${schedule.place} - ${schedule.time.format(context)}'),
-          trailing: IconButton(
-            icon: const Icon(Icons.delete, color: Colors.red),
-            onPressed: () => onDelete(schedule), // 🔸 삭제 동작 연결
+      children: List.generate(schedules.length, (index) {
+        final schedule = schedules[index];
+        final travelTime = _calculateTravelTime(index);
+        return Container(
+          margin: const EdgeInsets.symmetric(vertical: 4),
+          decoration: BoxDecoration(
+            color: Colors.blue.shade50,
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: ListTile(
+            title: Text(schedule.title),
+            subtitle: Text(
+              '${schedule.time.format(context)} | 이동 ${travelTime}분',
+            ),
+            trailing: PopupMenuButton<String>(
+              onSelected: (value) {
+                if (value == 'edit') onEdit(schedule);
+                if (value == 'delete') onDelete(schedule);
+              },
+              itemBuilder: (context) => const [
+                PopupMenuItem(value: 'edit', child: Text('수정')),
+                PopupMenuItem(value: 'delete', child: Text('삭제')),
+              ],
+            ),
           ),
         );
       }).toList(),
