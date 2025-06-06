@@ -3,11 +3,11 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import '../services/location_service.dart';
 
-import 'package:cbnu_planner/services/route_service.dart';
-import 'package:cbnu_planner/utils/building_data.dart';
-import 'package:cbnu_planner/models/schedule.dart';
+import '../services/route_service.dart';
+import '../data/building_data.dart';
+import '../../schedule/models/schedule.dart';
 import '../services/map_service.dart';
-import '../services/schedule_storage.dart';
+import '../../schedule/services/schedule_storage.dart';
 
 class MapRoutePage extends StatefulWidget {
   final List<Schedule>? schedules;
@@ -24,6 +24,7 @@ class _MapRoutePageState extends State<MapRoutePage> {
   double totalDistance = 0.0;
   int estimatedTime = 0;
   List<Schedule> schedules = [];
+  int? _selectedIndex;
 
   @override
   void initState() {
@@ -100,6 +101,21 @@ class _MapRoutePageState extends State<MapRoutePage> {
     });
   }
 
+  int _calculateTravelTime(int index) {
+    if (start == null) return 0;
+    LatLng from;
+    if (index == 0) {
+      from = start!;
+    } else {
+      final prev = schedules[index - 1];
+      from = MapService.getBuildingCoordinates(prev.zone, prev.place);
+    }
+    final curr = schedules[index];
+    final currCoord = MapService.getBuildingCoordinates(curr.zone, curr.place);
+    final distance = const Distance()(from, currCoord);
+    return (distance / 80).round();
+  }
+
   @override
   Widget build(BuildContext context) {
     if (start == null) {
@@ -109,12 +125,16 @@ class _MapRoutePageState extends State<MapRoutePage> {
     }
 
     return Scaffold(
-      appBar: AppBar(title: const Text("도보 경로 시각화")),
+      appBar: AppBar(title: const Text("지도")),
       body: Column(
         children: [
           Expanded(
             child: FlutterMap(
-              options: MapOptions(center: start!, zoom: 16.0),
+              options: MapOptions(
+                center: start!,
+                zoom: 16.0,
+                onTap: (_, __) => setState(() => _selectedIndex = null),
+              ),
               children: [
                 TileLayer(
                   urlTemplate: "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
@@ -129,18 +149,48 @@ class _MapRoutePageState extends State<MapRoutePage> {
                       height: 50,
                       child: const Icon(Icons.person_pin_circle, color: Colors.blue),
                     ),
-                    // 🔴 일정 목적지 마커
+                    // 🔴 일정 목적지 마커 + 이름/이동시간
                     if (schedules.isNotEmpty)
-                      ...schedules.map((schedule) {
+                      ...List.generate(schedules.length, (index) {
+                        final schedule = schedules[index];
                         final coord = MapService.getBuildingCoordinates(
                           schedule.zone,
                           schedule.place,
                         );
+                        final travelTime = _calculateTravelTime(index);
                         return Marker(
                           point: coord,
-                          width: 50,
-                          height: 50,
-                          child: const Icon(Icons.location_on, color: Colors.red),
+                          width: 120,
+                          height: 80,
+                          child: GestureDetector(
+                            onTap: () => setState(() => _selectedIndex = index),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                if (_selectedIndex == index)
+                                  Container(
+                                    margin: const EdgeInsets.only(bottom: 4),
+                                    padding: const EdgeInsets.all(4),
+                                    decoration: BoxDecoration(
+                                      color: Colors.white,
+                                      borderRadius: BorderRadius.circular(4),
+                                      boxShadow: const [
+                                        BoxShadow(
+                                          color: Colors.black26,
+                                          blurRadius: 4,
+                                        ),
+                                      ],
+                                    ),
+                                    child: Text(
+                                      '${schedule.place}\n${travelTime}분',
+                                      textAlign: TextAlign.center,
+                                      style: const TextStyle(fontSize: 12),
+                                    ),
+                                  ),
+                                const Icon(Icons.location_on, color: Colors.red),
+                              ],
+                            ),
+                          ),
                         );
                       }),
                   ],
@@ -156,7 +206,7 @@ class _MapRoutePageState extends State<MapRoutePage> {
           Padding(
             padding: const EdgeInsets.all(12.0),
             child: Text(
-              '총 거리: ${totalDistance.toStringAsFixed(1)} m / 예상 시간: ${estimatedTime}분',
+              '총 거리: ${totalDistance.toStringAsFixed(1)} m / 이동 예상 시간: ${estimatedTime}분',
               style: const TextStyle(fontSize: 16),
             ),
           ),

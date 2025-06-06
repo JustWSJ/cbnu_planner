@@ -5,9 +5,9 @@ import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import '../services/location_service.dart';
 
-import '../models/schedule.dart';
+import '../../schedule/models/schedule.dart';
 import '../services/map_service.dart';
-import '../utils/building_data.dart';
+import '../data/building_data.dart';
 
 class MapPage extends StatefulWidget {
   final List<Schedule> schedules;

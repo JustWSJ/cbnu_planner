@@ -1,3 +1,3 @@
 class ApiKeys {
-  static const openRouteService = 'API KEY';
+  static const openRouteService = 'API_Key';
 }

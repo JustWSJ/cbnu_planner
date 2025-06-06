@@ -1,7 +1,7 @@
 //  지도 관련 로직
 import '../models/building.dart';
 import 'package:latlong2/latlong.dart';
-import '../utils/building_data.dart';
+import '../data/building_data.dart';
 
 class MapService {
   static LatLng getBuildingCoordinates(String zone, String name) {
