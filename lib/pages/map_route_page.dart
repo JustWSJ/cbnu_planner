@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:geolocator/geolocator.dart';
+import '../services/location_service.dart';
 
 import 'package:cbnu_planner/services/route_service.dart';
 import 'package:cbnu_planner/utils/building_data.dart';
 import 'package:cbnu_planner/models/schedule.dart';
+import '../services/map_service.dart';
 import '../services/schedule_storage.dart';
 
 class MapRoutePage extends StatefulWidget {
@@ -39,7 +40,7 @@ class _MapRoutePageState extends State<MapRoutePage> {
       });
     }
 
-    getCurrentLocation().then((userLocation) {
+    LocationService.getCurrentLocation().then((userLocation) {
       setState(() {
         start = userLocation;
       });
@@ -65,11 +66,9 @@ class _MapRoutePageState extends State<MapRoutePage> {
         ..sort((a, b) => a.time.hour.compareTo(b.time.hour));
 
       for (var s in sorted) {
-        final building = buildingList.firstWhere(
-          (b) => b.name == s.place,
-          orElse: () => buildingList.first,
-        );
-        waypoints.add(building.location);
+        final coord =
+            MapService.getBuildingCoordinates(s.place, buildingList);
+        waypoints.add(coord);
       }
     }
 
