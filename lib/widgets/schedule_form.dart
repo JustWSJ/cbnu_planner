@@ -1,22 +1,25 @@
-//  일정 입력 폼
 import 'package:flutter/material.dart';
 
 class ScheduleForm extends StatelessWidget {
   final TextEditingController titleController;
+  final String? selectedZone;
   final String? selectedBuilding;
-  final List<String> buildings;
+  final Map<String, List<String>> buildingsByZone;
   final TimeOfDay? selectedTime;
   final VoidCallback onPickTime;
+  final Function(String?) onZoneChanged;
   final Function(String?) onBuildingChanged;
   final VoidCallback onSubmit;
 
   const ScheduleForm({
     super.key,
     required this.titleController,
+    required this.selectedZone,
     required this.selectedBuilding,
-    required this.buildings,
+    required this.buildingsByZone,
     required this.selectedTime,
     required this.onPickTime,
+    required this.onZoneChanged,
     required this.onBuildingChanged,
     required this.onSubmit,
   });
@@ -31,12 +34,24 @@ class ScheduleForm extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         DropdownButton<String>(
+          hint: const Text('구역 선택'),
+          value: selectedZone,
+          items: buildingsByZone.keys
+              .map<DropdownMenuItem<String>>(
+                  (z) => DropdownMenuItem<String>(value: z, child: Text(z)))
+              .toList(),
+          onChanged: onZoneChanged,
+        ),
+        const SizedBox(height: 12),
+        DropdownButton<String>(
           hint: const Text('건물 선택'),
           value: selectedBuilding,
-          items:
-              buildings
-                  .map((b) => DropdownMenuItem(value: b, child: Text(b)))
-                  .toList(),
+          items: (selectedZone != null
+                  ? buildingsByZone[selectedZone] ?? []
+                  : [])
+              .map<DropdownMenuItem<String>>(
+                  (b) => DropdownMenuItem<String>(value: b, child: Text(b)))
+              .toList(),
           onChanged: onBuildingChanged,
         ),
         const SizedBox(height: 12),

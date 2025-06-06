@@ -4,7 +4,8 @@
 import '../models/building.dart';
 import 'package:latlong2/latlong.dart';
 
-final List<Building> buildingList = [
+/// 북(N) 구역 건물들
+final List<Building> northBuildings = [
   Building(name: "법학전문대학원(N2)", location: LatLng(36.631918, 127.454300)), // N2
   Building(name: "산학협력관(N4)", location: LatLng(36.632529, 127.455171)), // N4
   Building(name: "평생교육원(N5)", location: LatLng(36.632069, 127.455791)), // N5
@@ -47,6 +48,10 @@ final List<Building> buildingList = [
   Building(
       name: "생활과학관(N20-1)", location: LatLng(36.630437, 127.460681)), // N20-1
   Building(name: "은하수식당(N21)", location: LatLng(36.629942, 127.460284)), // N21
+  ];
+
+/// 동(E) 구역 건물들
+final List<Building> eastBuildings = [
   Building(name: "사범대학실험동(E1-1)", location: LatLng(0.0, 0.0)), // E1-1
   Building(name: "사범대학강의동(E1-2)", location: LatLng(0.0, 0.0)), // E1-2
   Building(name: "개신문화관(E2)", location: LatLng(0.0, 0.0)), // E2
@@ -80,6 +85,10 @@ final List<Building> buildingList = [
   Building(name: "수의과대학2호관", location: LatLng(0.0, 0.0)), // E12-2
   Building(name: "수의과대학및동물의료센터", location: LatLng(0.0, 0.0)), // E12-1
   Building(name: "실험동물연구지원센터", location: LatLng(0.0, 0.0)), // E12-3
+  ];
+
+/// 남(S) 구역 건물들
+final List<Building> southBuildings = [
   Building(
       name: "자연과학대학본관(S1-1)", location: LatLng(36.627764, 127.456824)), // S1-1
   Building(
@@ -208,4 +217,18 @@ final List<Building> buildingList = [
       name: "농대부속건물(S21-24)",
       location: LatLng(36.630773, 127.452382)), // S21-24
 
+];
+
+/// 구역별 건물들을 모아둔 맵 (좌표가 지정된 건물만 포함)
+final Map<String, List<Building>> categorizedBuildings = {
+  'N': northBuildings.where((b) => b.hasValidCoordinates).toList(),
+  'E': eastBuildings.where((b) => b.hasValidCoordinates).toList(),
+  'S': southBuildings.where((b) => b.hasValidCoordinates).toList(),
+};
+
+/// 모든 건물을 하나의 리스트로 제공 (좌표가 지정된 건물만)
+final List<Building> buildingList = [
+  ...categorizedBuildings['N']!,
+  ...categorizedBuildings['E']!,
+  ...categorizedBuildings['S']!,
 ];

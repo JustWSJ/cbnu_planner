@@ -17,6 +17,7 @@ class ScheduleInputPage extends StatefulWidget {
 class _ScheduleInputPageState extends State<ScheduleInputPage> {
   final TextEditingController _titleController = TextEditingController();
   TimeOfDay? _selectedTime;
+  String? _selectedZone;
   String? _selectedBuilding;
   final List<Schedule> _schedules = [];
 
@@ -45,6 +46,7 @@ class _ScheduleInputPageState extends State<ScheduleInputPage> {
 
   void _submitSchedule() {
     if (_titleController.text.isEmpty ||
+        _selectedZone == null ||
         _selectedBuilding == null ||
         _selectedTime == null) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -57,12 +59,14 @@ class _ScheduleInputPageState extends State<ScheduleInputPage> {
       _schedules.add(
         Schedule(
           title: _titleController.text,
+          zone: _selectedZone!,
           place: _selectedBuilding!,
           time: _selectedTime!,
         ),
       );
       _titleController.clear();
       _selectedTime = null;
+      _selectedZone = null;
       _selectedBuilding = null;
     });
 
@@ -86,10 +90,18 @@ class _ScheduleInputPageState extends State<ScheduleInputPage> {
           children: [
             ScheduleForm(
               titleController: _titleController,
+              selectedZone: _selectedZone,
               selectedBuilding: _selectedBuilding,
-              buildings: buildingList.map((b) => b.name).toList(),
+              buildingsByZone: {
+                for (var entry in categorizedBuildings.entries)
+                  entry.key: entry.value.map((b) => b.name).toList()
+              },
               selectedTime: _selectedTime,
               onPickTime: _pickTime,
+              onZoneChanged: (value) => setState(() {
+                _selectedZone = value;
+                _selectedBuilding = null;
+              }),
               onBuildingChanged:
                   (value) => setState(() => _selectedBuilding = value),
               onSubmit: _submitSchedule,
