@@ -1,4 +1,3 @@
-//  일정 입력 폼
 import 'package:flutter/material.dart';
 
 class ScheduleForm extends StatelessWidget {
@@ -38,7 +37,8 @@ class ScheduleForm extends StatelessWidget {
           hint: const Text('구역 선택'),
           value: selectedZone,
           items: buildingsByZone.keys
-              .map((z) => DropdownMenuItem(value: z, child: Text(z)))
+              .map<DropdownMenuItem<String>>(
+                  (z) => DropdownMenuItem<String>(value: z, child: Text(z)))
               .toList(),
           onChanged: onZoneChanged,
         ),
@@ -49,7 +49,8 @@ class ScheduleForm extends StatelessWidget {
           items: (selectedZone != null
                   ? buildingsByZone[selectedZone] ?? []
                   : [])
-              .map((b) => DropdownMenuItem(value: b, child: Text(b)))
+              .map<DropdownMenuItem<String>>(
+                  (b) => DropdownMenuItem<String>(value: b, child: Text(b)))
               .toList(),
           onChanged: onBuildingChanged,
         ),
