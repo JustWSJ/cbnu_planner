@@ -1,9 +1,9 @@
-import 'dart:async'; // ← 추가
+import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:geolocator/geolocator.dart';
+import '../services/location_service.dart';
 
 import '../models/schedule.dart';
 import '../services/map_service.dart';
@@ -20,7 +20,7 @@ class MapPage extends StatefulWidget {
 
 class _MapPageState extends State<MapPage> {
   LatLng? currentLocation;
-  StreamSubscription<Position>? _positionStream; // 위치 스트림 저장
+    StreamSubscription<LatLng>? _positionStream; // 위치 스트림 저장
 
   @override
   void initState() {
@@ -28,25 +28,11 @@ class _MapPageState extends State<MapPage> {
     _startTrackingLocation();
   }
 
-  void _startTrackingLocation() async {
-    LocationPermission permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied || permission == LocationPermission.deniedForever) {
-      permission = await Geolocator.requestPermission();
-    }
-
-    if (permission == LocationPermission.always || permission == LocationPermission.whileInUse) {
-      _positionStream = Geolocator.getPositionStream(
-        locationSettings: const LocationSettings(
-          accuracy: LocationAccuracy.best,
-          distanceFilter: 5,
-        ),
-      ).listen((Position position) {
-        if (!mounted) return; // 페이지가 사라졌을 경우 방지
-        setState(() {
-          currentLocation = LatLng(position.latitude, position.longitude);
-        });
-      });
-    }
+  void _startTrackingLocation() {
+    _positionStream = LocationService.locationStream().listen((location) {
+      if (!mounted) return;
+      setState(() => currentLocation = location);
+    });
   }
 
   @override

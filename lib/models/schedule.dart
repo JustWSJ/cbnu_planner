@@ -7,4 +7,21 @@ class Schedule {
   final TimeOfDay time;
 
   Schedule({required this.title, required this.place, required this.time});
+
+  Map<String, dynamic> toMap() {
+    return {
+      'title': title,
+      'place': place,
+      'hour': time.hour,
+      'minute': time.minute,
+    };
+  }
+
+   factory Schedule.fromMap(Map<String, dynamic> map) {
+    return Schedule(
+      title: map['title'] as String,
+      place: map['place'] as String,
+      time: TimeOfDay(hour: map['hour'] as int, minute: map['minute'] as int),
+    );
+  }
 }

@@ -4,7 +4,8 @@ import '../models/schedule.dart';
 import '../widgets/schedule_form.dart';
 import '../widgets/schedule_list.dart';
 import '../utils/building_data.dart';
-import 'package:cbnu_planner/pages/map_route_page.dart'; 
+import 'package:cbnu_planner/pages/map_route_page.dart';
+import '../services/schedule_storage.dart';
 
 
 class ScheduleInputPage extends StatefulWidget {
@@ -19,6 +20,19 @@ class _ScheduleInputPageState extends State<ScheduleInputPage> {
   TimeOfDay? _selectedTime;
   String? _selectedBuilding;
   final List<Schedule> _schedules = [];
+
+   @override
+  void initState() {
+    super.initState();
+    _loadSchedules();
+  }
+
+  Future<void> _loadSchedules() async {
+    final loaded = await ScheduleStorage.loadSchedules();
+    setState(() {
+      _schedules.addAll(loaded);
+    });
+  }
 
   void _pickTime() async {
     final picked = await showTimePicker(
@@ -52,6 +66,7 @@ class _ScheduleInputPageState extends State<ScheduleInputPage> {
       _selectedTime = null;
       _selectedBuilding = null;
     });
+    ScheduleStorage.saveSchedules(_schedules);
   }
 
   @override

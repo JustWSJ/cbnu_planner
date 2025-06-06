@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:geolocator/geolocator.dart';
+import '../services/location_service.dart';
 
 import 'package:cbnu_planner/services/route_service.dart';
 import 'package:cbnu_planner/utils/building_data.dart';
 import 'package:cbnu_planner/models/schedule.dart';
+import '../services/map_service.dart';
+import '../services/schedule_storage.dart';
 
 class MapRoutePage extends StatefulWidget {
   final List<Schedule>? schedules;
@@ -21,19 +23,37 @@ class _MapRoutePageState extends State<MapRoutePage> {
   List<LatLng> routePoints = [];
   double totalDistance = 0.0;
   int estimatedTime = 0;
+  List<Schedule> schedules = [];
 
   @override
   void initState() {
     super.initState();
 
-    getCurrentLocation().then((userLocation) {
+    if (widget.schedules != null) {
+      schedules = List<Schedule>.from(widget.schedules!);
+    } else {
+      ScheduleStorage.loadSchedules().then((value) {
+        setState(() {
+          schedules = value;
+        });
+        _tryGetRoute();
+      });
+    }
+
+    LocationService.getCurrentLocation().then((userLocation) {
       setState(() {
         start = userLocation;
       });
-      getRoute();
+      _tryGetRoute();
     }).catchError((e) {
       print('현재 위치 가져오기 실패: $e');
     });
+  }
+
+  void _tryGetRoute() {
+    if (start != null) {
+      getRoute();
+    }
   }
 
   Future<void> getRoute() async {
@@ -41,17 +61,24 @@ class _MapRoutePageState extends State<MapRoutePage> {
 
     List<LatLng> waypoints = [start!];
 
-    if (widget.schedules != null && widget.schedules!.isNotEmpty) {
-      List<Schedule> sorted = List<Schedule>.from(widget.schedules!)
+    if (schedules.isNotEmpty) {
+      List<Schedule> sorted = List<Schedule>.from(schedules)
         ..sort((a, b) => a.time.hour.compareTo(b.time.hour));
 
       for (var s in sorted) {
-        final building = buildingList.firstWhere(
-          (b) => b.name == s.place,
-          orElse: () => buildingList.first,
-        );
-        waypoints.add(building.location);
+        final coord =
+            MapService.getBuildingCoordinates(s.place, buildingList);
+        waypoints.add(coord);
       }
+    }
+
+    if (waypoints.length < 2) {
+      setState(() {
+        routePoints = [];
+        totalDistance = 0.0;
+        estimatedTime = 0;
+      });
+      return;
     }
 
     final points = await RouteService.fetchRouteWithWaypoints(waypoints);
@@ -69,29 +96,6 @@ class _MapRoutePageState extends State<MapRoutePage> {
       totalDistance = distance;
       estimatedTime = (distance / 80).round(); // 도보 기준 약 80 m/min
     });
-  }
-
-  Future<LatLng> getCurrentLocation() async {
-    bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
-    if (!serviceEnabled) {
-      throw Exception("위치 서비스가 비활성화되어 있습니다.");
-    }
-
-    LocationPermission permission = await Geolocator.checkPermission();
-    if (permission == LocationPermission.denied) {
-      permission = await Geolocator.requestPermission();
-      if (permission == LocationPermission.denied) {
-        throw Exception("위치 권한이 거부되었습니다.");
-      }
-    }
-
-    if (permission == LocationPermission.deniedForever) {
-      throw Exception("위치 권한이 영구적으로 거부되었습니다.");
-    }
-
-    final position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-    return LatLng(position.latitude, position.longitude);
   }
 
   @override
@@ -124,14 +128,12 @@ class _MapRoutePageState extends State<MapRoutePage> {
                       child: const Icon(Icons.person_pin_circle, color: Colors.blue),
                     ),
                     // 🔴 일정 목적지 마커
-                    if (widget.schedules != null)
-                      ...widget.schedules!.map((schedule) {
-                        final building = buildingList.firstWhere(
-                          (b) => b.name == schedule.place,
-                          orElse: () => buildingList.first,
-                        );
+                    if (schedules.isNotEmpty)
+                      ...schedules.map((schedule) {
+                        final coord = MapService.getBuildingCoordinates(
+                            schedule.place, buildingList);
                         return Marker(
-                          point: building.location,
+                          point: coord,
                           width: 50,
                           height: 50,
                           child: const Icon(Icons.location_on, color: Colors.red),
