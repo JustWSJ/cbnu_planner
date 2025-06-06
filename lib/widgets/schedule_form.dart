@@ -35,6 +35,15 @@ class ScheduleForm extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         DropdownButton<String>(
+          hint: const Text('구역 선택'),
+          value: selectedZone,
+          items: buildingsByZone.keys
+              .map((z) => DropdownMenuItem(value: z, child: Text(z)))
+              .toList(),
+          onChanged: onZoneChanged,
+        ),
+        const SizedBox(height: 12),
+        DropdownButton<String>(
           hint: const Text('건물 선택'),
           value: selectedBuilding,
           items:
