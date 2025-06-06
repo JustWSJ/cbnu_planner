@@ -18,6 +18,7 @@ class ScheduleInputPage extends StatefulWidget {
 class _ScheduleInputPageState extends State<ScheduleInputPage> {
   final TextEditingController _titleController = TextEditingController();
   TimeOfDay? _selectedTime;
+  String? _selectedZone;
   String? _selectedBuilding;
   final List<Schedule> _schedules = [];
 
@@ -46,6 +47,7 @@ class _ScheduleInputPageState extends State<ScheduleInputPage> {
 
   void _submitSchedule() {
     if (_titleController.text.isEmpty ||
+        _selectedZone == null ||
         _selectedBuilding == null ||
         _selectedTime == null) {
       ScaffoldMessenger.of(
@@ -58,12 +60,14 @@ class _ScheduleInputPageState extends State<ScheduleInputPage> {
       _schedules.add(
         Schedule(
           title: _titleController.text,
+          zone: _selectedZone!,
           place: _selectedBuilding!,
           time: _selectedTime!,
         ),
       );
       _titleController.clear();
       _selectedTime = null;
+      _selectedZone = null;
       _selectedBuilding = null;
     });
     ScheduleStorage.saveSchedules(_schedules);
