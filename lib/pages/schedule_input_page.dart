@@ -66,6 +66,7 @@ class _ScheduleInputPageState extends State<ScheduleInputPage> {
       _selectedTime = null;
       _selectedBuilding = null;
     });
+    ScheduleStorage.saveSchedules(_schedules);
   }
 
   @override
