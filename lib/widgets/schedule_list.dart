@@ -45,7 +45,17 @@ class ScheduleList extends StatelessWidget {
             ),
           ),
         );
-      }).toList(),
+      }),
     );
+  }
+  
+  int _calculateTravelTime(int index) {
+    if (index == 0) return 0;
+    final prev = schedules[index - 1];
+    final curr = schedules[index];
+    final prevCoord = MapService.getBuildingCoordinates(prev.zone, prev.place);
+    final currCoord = MapService.getBuildingCoordinates(curr.zone, curr.place);
+    final distance = const Distance()(prevCoord, currCoord);
+    return (distance / 80).round();
   }
 }
