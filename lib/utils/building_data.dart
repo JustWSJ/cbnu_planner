@@ -225,3 +225,10 @@ final Map<String, List<Building>> categorizedBuildings = {
   'E': eastBuildings,
   'S': southBuildings,
 };
+
+/// 모든 건물을 하나의 리스트로 제공
+final List<Building> buildingList = [
+  ...northBuildings,
+  ...eastBuildings,
+  ...southBuildings,
+];
