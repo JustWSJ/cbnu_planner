@@ -1,32 +1,41 @@
-import 'dart:convert';
-import 'package:http/http.dart' as http;
 import 'package:latlong2/latlong.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
+import 'package:cbnu_planner/secrets/api_keys.dart'; // 🔐 API 키 모듈화
 
 class RouteService {
-  static const _apiKey = '5b3ce3597851110001cf6248c8b7b039e91545918016bbf70f29574a';
-  static const _baseUrl = 'https://api.openrouteservice.org/v2/directions/foot-walking';
+  static const String _apiKey = ApiKeys.openRouteService;
 
-  static Future<List<LatLng>> getRoute(LatLng start, LatLng end) async {
+  /// 단일 도보 경로 요청: 시작 → 도착
+  static Future<List<LatLng>> fetchWalkingRoute(LatLng start, LatLng end) async {
+    return fetchRouteWithWaypoints([start, end]);
+  }
+
+  /// 경유지 포함 도보 경로 요청: 시작 → 경유지* → 도착
+  static Future<List<LatLng>> fetchRouteWithWaypoints(List<LatLng> coordinates) async {
+    final url = Uri.parse('https://api.openrouteservice.org/v2/directions/foot-walking/geojson');
+
+    final body = jsonEncode({
+      "coordinates": coordinates.map((c) => [c.longitude, c.latitude]).toList(),
+    });
+
     final response = await http.post(
-      Uri.parse(_baseUrl),
+      url,
       headers: {
-        'Authorization': '5b3ce3597851110001cf6248c8b7b039e91545918016bbf70f29574a',
+        'Authorization': _apiKey,
         'Content-Type': 'application/json',
       },
-      body: json.encode({
-        'coordinates': [
-          [start.longitude, start.latitude],
-          [end.longitude, end.latitude],
-        ]
-      }),
+      body: body,
     );
 
     if (response.statusCode == 200) {
-      final data = json.decode(response.body);
-      final coords = data['features'][0]['geometry']['coordinates'] as List;
+      final data = jsonDecode(response.body);
+      final coords = data['features'][0]['geometry']['coordinates'];
       return coords.map<LatLng>((c) => LatLng(c[1], c[0])).toList();
     } else {
-      throw Exception('Failed to get route: ${response.body}');
+      print('🚫 경로 요청 실패: ${response.statusCode}');
+      print('응답 내용: ${response.body}');
+      return [];
     }
   }
 }

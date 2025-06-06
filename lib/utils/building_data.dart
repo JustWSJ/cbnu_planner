@@ -207,4 +207,5 @@ final List<Building> buildingList = [
   Building(
       name: "농대부속건물(S21-24)",
       location: LatLng(36.630773, 127.452382)), // S21-24
+
 ];
