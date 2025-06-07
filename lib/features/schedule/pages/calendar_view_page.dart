@@ -39,3 +39,14 @@ class _CalendarViewPageState extends State<CalendarViewPage> {
       _selectedEvents = _getEventsForDay(_selectedDay!);
     });
   }
+
+  DateTime _convertToDateTime(TimeOfDay tod) {
+    final now = DateTime.now();
+    return DateTime(now.year, now.month, now.day, tod.hour, tod.minute);
+  }
+
+  List<Schedule> _getEventsForDay(DateTime day) {
+    return _events[DateTime(day.year, day.month, day.day)] ?? [];
+  }
+
+ 
