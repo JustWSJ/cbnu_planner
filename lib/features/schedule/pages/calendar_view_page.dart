@@ -17,4 +17,14 @@ class _CalendarViewPageState extends State<CalendarViewPage> {
   List<Schedule> _selectedEvents = [];
 
   @override
-  
+  void initState() {
+    super.initState();
+    _events = {};
+    _loadSchedules();
+  }
+
+  Future<void> _loadSchedules() async {
+    final schedules = await ScheduleStorage.loadSchedules();
+    Map<DateTime, List<Schedule>> grouped = {};
+
+    
