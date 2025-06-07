@@ -5,54 +5,80 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:cbnu_planner/features/map/services/route_service.dart';
 import 'package:latlong2/latlong.dart';
 
-class _FakeHttpClient extends HttpClient {
+class FakeHttpOverrides extends HttpOverrides {
+  final String responseBody;
+  FakeHttpOverrides(this.responseBody);
+
+  @override
+  HttpClient createHttpClient(SecurityContext? context) {
+    return _MockHttpClient(responseBody);
+  }
+}
+
+class _MockHttpClient implements HttpClient {
   final String body;
-  _FakeHttpClient(this.body);
+  _MockHttpClient(this.body);
 
   @override
   Future<HttpClientRequest> postUrl(Uri url) async {
-    return _FakeHttpClientRequest(body);
+    return _MockHttpClientRequest(body);
+  }
+
+  // ✅ 필수: close 메서드 추가
+  @override
+  void close({bool force = false}) {
+    // 테스트 목적이므로 실제 리소스 정리는 생략
   }
 
   @override
   noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }
 
-class _FakeHttpClientRequest implements HttpClientRequest {
+class _MockHttpClientRequest implements HttpClientRequest {
   final String body;
-  _FakeHttpClientRequest(this.body);
+  _MockHttpClientRequest(this.body);
 
   @override
-  final HttpHeaders headers = _FakeHttpHeaders();
+  final HttpHeaders headers = _MockHttpHeaders();
 
   @override
-  Future<HttpClientResponse> close() async => _FakeHttpClientResponse(body);
+  Future<HttpClientResponse> close() async => _MockHttpClientResponse(body);
 
   @override
   noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }
 
-class _FakeHttpClientResponse extends Stream<List<int>> implements HttpClientResponse {
+class _MockHttpClientResponse extends Stream<List<int>>
+    implements HttpClientResponse {
   final String body;
-  _FakeHttpClientResponse(this.body);
+  _MockHttpClientResponse(this.body);
 
   @override
   int get statusCode => 200;
 
   @override
-  StreamSubscription<List<int>> listen(void Function(List<int>)? onData,
-      {Function? onError, void Function()? onDone, bool? cancelOnError}) {
+  StreamSubscription<List<int>> listen(
+    void Function(List<int>)? onData, {
+    Function? onError,
+    void Function()? onDone,
+    bool? cancelOnError,
+  }) {
     final data = utf8.encode(body);
-    return Stream<List<int>>.fromIterable([data]).listen(onData,
-        onError: onError, onDone: onDone, cancelOnError: cancelOnError);
+    return Stream<List<int>>.fromIterable([data]).listen(
+      onData,
+      onError: onError,
+      onDone: onDone,
+      cancelOnError: cancelOnError,
+    );
   }
 
   @override
   noSuchMethod(Invocation invocation) => super.noSuchMethod(invocation);
 }
 
-class _FakeHttpHeaders implements HttpHeaders {
+class _MockHttpHeaders implements HttpHeaders {
   final Map<String, List<String>> _values = {};
+
   @override
   void add(String name, Object value, {bool preserveHeaderCase = false}) {
     _values.putIfAbsent(name, () => []).add(value.toString());
@@ -79,12 +105,15 @@ void main() {
 
     final points = [const LatLng(1.0, 0.0), const LatLng(3.0, 2.0)];
 
-    final result = await HttpOverrides.runZoned(() {
-      return RouteService.fetchRouteWithWaypoints(points);
-    }, createHttpClient: (_) => _FakeHttpClient(responseBody));
+    await HttpOverrides.runZoned(
+      () async {
+        final result = await RouteService.fetchRouteWithWaypoints(points);
 
-    expect(result.length, 2);
-    expect(result.first.latitude, 1.0);
-    expect(result.first.longitude, 0.0);
+        expect(result.length, 2);
+        expect(result[0].latitude, 1.0);
+        expect(result[0].longitude, 0.0);
+      },
+      createHttpClient: (_) => _MockHttpClient(responseBody),
+    );
   });
 }

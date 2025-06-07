@@ -23,4 +23,10 @@ void main() {
     expect(loaded.length, 1);
     expect(loaded.first.title, 't1');
   });
+
+  test('loadSchedules returns empty list when no data saved', () async {
+    SharedPreferences.setMockInitialValues({});
+    final loaded = await ScheduleStorage.loadSchedules();
+    expect(loaded, isEmpty);
+  });
 }
