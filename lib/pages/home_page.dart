@@ -13,3 +13,12 @@ class CampusScheduleApp extends StatefulWidget {
   State<CampusScheduleApp> createState() => _CampusScheduleAppState();
 }
 
+class _CampusScheduleAppState extends State<CampusScheduleApp> {
+  ThemeMode _themeMode = ThemeMode.light;
+
+  void _toggleTheme(bool isDark) {
+    setState(() {
+      _themeMode = isDark ? ThemeMode.dark : ThemeMode.light;
+    });
+  }
+
