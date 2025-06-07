@@ -21,4 +21,13 @@ class _CampusScheduleAppState extends State<CampusScheduleApp> {
     });
   }
 
-
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: '스마트 캠퍼스 스케줄러',
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        brightness: Brightness.light,
+      ),
+  
