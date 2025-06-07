@@ -6,6 +6,7 @@ import '../widgets/schedule_form.dart';
 import '../widgets/schedule_list.dart';
 import '../../map/data/building_data.dart';
 import '../services/schedule_storage.dart';
+import 'calendar_view_page.dart';
 
 class ScheduleInputPage extends StatefulWidget {
   const ScheduleInputPage({super.key});
@@ -143,39 +144,56 @@ class _ScheduleInputPageState extends State<ScheduleInputPage> {
     });
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('일정 입력')),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            ScheduleForm(
-              titleController: _titleController,
-              selectedZone: _selectedZone,
-              selectedBuilding: _selectedBuilding,
-              buildingsByZone: {
-                for (var entry in categorizedBuildings.entries)
-                  entry.key: entry.value.map((b) => b.name).toList()
+@override
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(title: const Text('일정 입력')),
+    body: Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: Column(
+        children: [
+          // ✅ 캘린더 보기 버튼 추가
+          Align(
+            alignment: Alignment.centerRight,
+            child: ElevatedButton.icon(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (_) => const CalendarViewPage()),
+                );
               },
-              selectedTime: _selectedTime,
-              onPickTime: _pickTime,
-              onZoneChanged: (value) => setState(() {
-                _selectedZone = value;
-                _selectedBuilding = null;
-              }),
-              onBuildingChanged:
-                  (value) => setState(() => _selectedBuilding = value),
-              onSubmit: _submitSchedule,
-              submitText: _editingIndex != null ? '수정 완료' : '일정 추가',
+              icon: const Icon(Icons.calendar_today),
+              label: const Text('캘린더로 보기'),
             ),
-            const SizedBox(height: 20),
-            ScheduleList(
-              schedules: _schedules,
-              onDelete: _deleteSchedule,
-              onEdit: _editSchedule,
-            ),
+          ),
+          const SizedBox(height: 10),
+
+          // ✅ 기존 입력 폼
+          ScheduleForm(
+            titleController: _titleController,
+            selectedZone: _selectedZone,
+            selectedBuilding: _selectedBuilding,
+            buildingsByZone: {
+              for (var entry in categorizedBuildings.entries)
+                entry.key: entry.value.map((b) => b.name).toList()
+            },
+            selectedTime: _selectedTime,
+            onPickTime: _pickTime,
+            onZoneChanged: (value) => setState(() {
+              _selectedZone = value;
+              _selectedBuilding = null;
+            }),
+            onBuildingChanged:
+                (value) => setState(() => _selectedBuilding = value),
+            onSubmit: _submitSchedule,
+            submitText: _editingIndex != null ? '수정 완료' : '일정 추가',
+          ),
+          const SizedBox(height: 20),
+          ScheduleList(
+            schedules: _schedules,
+            onDelete: _deleteSchedule,
+            onEdit: _editSchedule,
+          ),
           ],
         ),
       ),

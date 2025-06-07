@@ -1,26 +1,94 @@
-# CBNU Planner
+# 📘 CBNU Planner
 
-A Flutter app for managing campus schedules at Chungbuk National University. It lets you record daily plans, view them on a campus map and get walking routes between locations.
+CBNU Planner is a Flutter-based campus schedule management app designed for students at Chungbuk National University.  
+It allows users to input their daily plans, view locations on a campus map, and get walking routes based on real positions.
 
-## Features
+---
 
-- **Schedule Management** – add, edit and delete schedule items using `ScheduleInputPage` with inputs for time and building.
-- **Map View** – see current location and schedule markers on the map via `MapPage`.
-- **Route Planner** – calculate walking directions for a sequence of schedule stops with `MapRoutePage` and `RouteService`.
-- **Local Storage** – schedules are persisted using `SharedPreferences` through `ScheduleStorage`.
+## ✨ Features
 
-## Project Structure
+- 📅 **Schedule Management**  
+  - Add, edit, and delete schedule items with zone, place, and time input.  
+  - User-friendly and intuitive interface.
 
-- `lib/main.dart` – app entry point.
-- `lib/pages/home_page.dart` – bottom navigation between schedule and map tabs.
-- `lib/features/schedule` – models, widgets and services for schedule input and list UI.
-- `lib/features/map` – building data, map/route pages and location utilities.
-- `lib/secrets/api_keys.dart` – contains the OpenRouteService API key.
+- 🗺️ **Map View**  
+  - Display the current GPS location with a blue marker.  
+  - Show schedule locations with red markers on the map.
 
-## Getting Started
+- 🧭 **Route Guidance**  
+  - Calculate walking routes from the current location to each scheduled place.  
+  - Display total walking distance and estimated travel time.  
+  - Uses real walking paths via OpenRouteService.
 
-1. Install Flutter (>= 3.0). Run `flutter pub get` to fetch packages.
-2. Supply your OpenRouteService API key in `lib/secrets/api_keys.dart`.
-3. Launch with `flutter run` on your preferred device or emulator.
+- 🌙 **Dark Mode Support**  
+  - Easily switch between light and dark modes with a toggle button.
 
-> **Note**: The branch `branch_Demo` is an early test branch and should never be merged.
+---
+
+## 🗂️ Project Structure
+
+```
+lib/
+├── main.dart                      # App entry point
+├── pages/
+│   └── home_page.dart             # Theme toggle & bottom navigation
+├── features/
+│   ├── schedule/                  # Schedule models, storage, UI
+│   └── map/
+│       ├── pages/                 # Map view & route pages
+│       ├── data/                  # Building coordinates
+│       └── services/              # Location & route services
+├── secrets/
+│   └── api_keys.dart              # Contains OpenRouteService API key
+```
+
+---
+
+## 🚀 Getting Started
+
+1. Install Flutter SDK (version >= 3.0).
+2. Run:
+
+```bash
+flutter pub get
+```
+
+3. Create the file `lib/secrets/api_keys.dart` and add your API key:
+
+```dart
+const openRouteServiceApiKey = 'YOUR_API_KEY_HERE';
+```
+
+4. Launch the app:
+
+```bash
+flutter run
+```
+
+---
+
+## ⚠️ Notes
+
+- The real-time location transmission feature has been **disabled** due to the lack of backend support.
+- Webhook testing has been removed to prevent errors.
+
+---
+
+## 💡 Future Ideas
+
+- [ ] Building search bar  
+- [ ] Push notifications before schedule time  
+- [ ] Weekly/monthly calendar view  
+- [ ] Export/share schedules  
+- [ ] Firebase or Supabase integration
+
+---
+
+## 👨‍💻 Developer
+
+- JustWSJ @ Chungbuk National University, Computer Engineering 
+- 0l2jh @ Chungbuk National University, Computer Engineering 
+- minjungE @ Chungbuk National University, Computer Engineering 
+- jsr128989 @ Chungbuk National University, Computer Engineering 
+- Developed as part of an open-source project course  
+- Feedback and contributions are welcome!
