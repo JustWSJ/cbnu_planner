@@ -27,4 +27,15 @@ class _CalendarViewPageState extends State<CalendarViewPage> {
     final schedules = await ScheduleStorage.loadSchedules();
     Map<DateTime, List<Schedule>> grouped = {};
 
-    
+    for (var s in schedules) {
+      final dt = _convertToDateTime(s.time);
+      final dateKey = DateTime(dt.year, dt.month, dt.day);
+      grouped.putIfAbsent(dateKey, () => []).add(s);
+    }
+
+    setState(() {
+      _events = grouped;
+      _selectedDay = _focusedDay;
+      _selectedEvents = _getEventsForDay(_selectedDay!);
+    });
+  }
