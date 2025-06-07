@@ -1,7 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:cbnu_planner/main.dart';
 
 void main() {
-  test('main dummy', () {
-    expect(1, 1);
+  testWidgets('App builds MaterialApp', (tester) async {
+    await tester.pumpWidget(const CampusScheduleApp());
+    expect(find.byType(MaterialApp), findsOneWidget);
   });
 }
