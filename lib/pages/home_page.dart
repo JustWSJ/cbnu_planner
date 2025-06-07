@@ -6,3 +6,10 @@ class HomePage extends StatefulWidget {
   final bool isDarkMode;
   final ValueChanged<bool> onThemeChanged;
 
+class CampusScheduleApp extends StatefulWidget {
+  const CampusScheduleApp({super.key});
+
+  @override
+  State<CampusScheduleApp> createState() => _CampusScheduleAppState();
+}
+
