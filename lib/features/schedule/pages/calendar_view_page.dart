@@ -68,4 +68,14 @@ class _CalendarViewPageState extends State<CalendarViewPage> {
                 _selectedEvents = _getEventsForDay(selectedDay);
               });
             },
-            
+            calendarStyle: const CalendarStyle(
+              todayDecoration: BoxDecoration(
+                color: Colors.blue,
+                shape: BoxShape.circle,
+              ),
+              selectedDecoration: BoxDecoration(
+                color: Colors.deepPurple,
+                shape: BoxShape.circle,
+              ),
+            ),
+          ),
