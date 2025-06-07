@@ -30,4 +30,15 @@ class _CampusScheduleAppState extends State<CampusScheduleApp> {
         primarySwatch: Colors.blue,
         brightness: Brightness.light,
       ),
-  
+      darkTheme: ThemeData(
+        primarySwatch: Colors.blue,
+        brightness: Brightness.dark,
+      ),
+      themeMode: _themeMode,
+      home: HomePage(
+        isDarkMode: _themeMode == ThemeMode.dark,
+        onThemeChanged: _toggleTheme,
+      ),
+    );
+  }
+}
