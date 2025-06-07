@@ -79,3 +79,22 @@ class _CalendarViewPageState extends State<CalendarViewPage> {
               ),
             ),
           ),
+          const SizedBox(height: 8),
+          Expanded(
+            child: ListView.builder(
+              itemCount: _selectedEvents.length,
+              itemBuilder: (context, index) {
+                final s = _selectedEvents[index];
+                return ListTile(
+                  leading: const Icon(Icons.schedule),
+                  title: Text(s.title),
+                  subtitle: Text('${s.zone} - ${s.place} | ${s.time.format(context)}'),
+                );
+              },
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
