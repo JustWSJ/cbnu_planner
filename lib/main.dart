@@ -5,3 +5,10 @@ void main() {
   runApp(const CampusScheduleApp());
 }
 
+class CampusScheduleApp extends StatefulWidget {
+  const CampusScheduleApp({super.key});
+
+  @override
+  State<CampusScheduleApp> createState() => _CampusScheduleAppState();
+}
+
