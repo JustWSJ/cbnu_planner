@@ -120,7 +120,7 @@ flutter run   # or flutter run -d chrome for web
 | Junhyeong Lim  | Development & Maintenance | [@0l2jh](https://github.com/0l2jh)     |
 | Seungje Woo    | Development & Maintenance | [@JustWSJ](https://github.com/JustWSJ) |
 | Minjeong Kim   | UI Design                 | [@minjungE](https://github.com/minjungE) |
-| Aryeong Jang   | UI Design                 | [@jsr128989](https://github.com/jsr128989) |
+| Ahryeong Jang   | UI Design                 | [@ahryeong](https://github.com/ahryeong) |
 
 ---
 
