@@ -49,4 +49,23 @@ class _CalendarViewPageState extends State<CalendarViewPage> {
     return _events[DateTime(day.year, day.month, day.day)] ?? [];
   }
 
- 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('캘린더 일정 보기')),
+      body: Column(
+        children: [
+          TableCalendar<Schedule>(
+            firstDay: DateTime.utc(2020, 1, 1),
+            lastDay: DateTime.utc(2030, 12, 31),
+            focusedDay: _focusedDay,
+            selectedDayPredicate: (day) => isSameDay(_selectedDay, day),
+            eventLoader: _getEventsForDay,
+            onDaySelected: (selectedDay, focusedDay) {
+              setState(() {
+                _selectedDay = selectedDay;
+                _focusedDay = focusedDay;
+                _selectedEvents = _getEventsForDay(selectedDay);
+              });
+            },
+            
