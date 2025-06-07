@@ -36,3 +36,20 @@ class _HomePageState extends State<HomePage> {
         tooltip: '다크모드',
         child: Icon(widget.isDarkMode ? Icons.dark_mode : Icons.light_mode),
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: _onTap,
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.list),
+            label: '내 일정',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.map),
+            label: '지도',
+          ),
+        ],
+      ),
+    );
+  }
+}
