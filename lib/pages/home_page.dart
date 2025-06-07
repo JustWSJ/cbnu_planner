@@ -6,19 +6,33 @@ class HomePage extends StatefulWidget {
   final bool isDarkMode;
   final ValueChanged<bool> onThemeChanged;
 
-class CampusScheduleApp extends StatefulWidget {
-  const CampusScheduleApp({super.key});
+  const HomePage({
+    super.key,
+    required this.isDarkMode,
+    required this.onThemeChanged,
+  });
 
   @override
-  State<CampusScheduleApp> createState() => _CampusScheduleAppState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _CampusScheduleAppState extends State<CampusScheduleApp> {
-  ThemeMode _themeMode = ThemeMode.light;
+class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 1; // 시작 탭: 지도
+  final List<Widget> _pages = [
+    const ScheduleInputPage(),
+    const MapRoutePage(),
+  ];
 
-  void _toggleTheme(bool isDark) {
-    setState(() {
-      _themeMode = isDark ? ThemeMode.dark : ThemeMode.light;
-    });
+  void _onTap(int index) {
+    setState(() => _selectedIndex = index);
   }
 
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: _pages[_selectedIndex],
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => widget.onThemeChanged(!widget.isDarkMode),
+        tooltip: '다크모드',
+        child: Icon(widget.isDarkMode ? Icons.dark_mode : Icons.light_mode),
+      ),
